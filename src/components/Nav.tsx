@@ -50,7 +50,7 @@ export default function Nav() {
 							to="/"
 							className={({ isActive }) => (isActive ? activeStyles : "")}
 						>
-							Host
+							Home
 						</NavLink>
 					</li>
 					<li>
@@ -67,6 +67,14 @@ export default function Nav() {
 							className={({ isActive }) => (isActive ? activeStyles : "")}
 						>
 							Vans
+						</NavLink>
+					</li>
+					<li>
+						<NavLink
+							to="host"
+							className={({ isActive }) => (isActive ? activeStyles : "")}
+						>
+							Host
 						</NavLink>
 					</li>
 				</ul>
