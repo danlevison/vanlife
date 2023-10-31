@@ -3,14 +3,14 @@ import { Link, useSearchParams } from "react-router-dom"
 import { fetchVanData } from "../../api"
 
 type VanType = {
-	createdAt: string
+	created_at: string
 	description: string
+	hostId: string
+	id: number
+	imageURL: string
 	name: string
 	price: string
 	type: string
-	imageURL: string
-	id: number
-	hostId: string
 	vanId: string
 }
 
