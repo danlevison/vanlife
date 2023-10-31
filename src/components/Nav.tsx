@@ -5,7 +5,6 @@ import { AiOutlineClose } from "react-icons/ai"
 
 export default function Nav() {
 	const [nav, setNav] = useState(false)
-	const [windowWidth, setWindowWidth] = useState<number | null>(null)
 	const activeStyles = "underline font-semibold"
 
 	const handleNav = () => {
@@ -19,9 +18,7 @@ export default function Nav() {
 
 	useEffect(() => {
 		const handleResize = () => {
-			setWindowWidth(window.innerWidth)
 			const newWidth = window.innerWidth
-			setWindowWidth(newWidth)
 			if (newWidth >= 768) {
 				setNav(false)
 			}
