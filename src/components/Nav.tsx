@@ -44,7 +44,7 @@ export default function Nav() {
 				>
 					#VanLife
 				</Link>
-				<ul className="hidden md:flex gap-10">
+				<ul className="hidden md:flex gap-10 text-primaryText">
 					<li>
 						<NavLink
 							to="/"
@@ -94,7 +94,7 @@ export default function Nav() {
 						nav ? "left-0 w-full bg-[#fff7ed] text-center" : "left-[-100%]"
 					}`}
 				>
-					<ul className="flex flex-col gap-16 text-lg">
+					<ul className="flex flex-col gap-16 text-lg text-primaryText">
 						<li>
 							<NavLink
 								to="/"
