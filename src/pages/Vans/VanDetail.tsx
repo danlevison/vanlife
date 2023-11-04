@@ -71,7 +71,9 @@ export default function VanDetail() {
 							<Rules van={van} />
 							<Cancellation />
 						</div>
-						<CheckAvailability van={van} />
+						<div className="flex justify-center items-center w-full">
+							<CheckAvailability van={van} />
+						</div>
 					</div>
 				</div>
 			)}

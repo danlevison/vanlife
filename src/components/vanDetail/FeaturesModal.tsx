@@ -18,7 +18,7 @@ export default function FeaturesModal({ van }: FeaturesModalProps) {
 			<DialogTrigger className="text-orangeAccent flex gap-1 hover:bg-[#FFEAD0] p-2 rounded-lg mt-5">
 				Show more features
 			</DialogTrigger>
-			<DialogContent className="overflow-auto h-[80%] bg-[#FFEAD0]">
+			<DialogContent className="overflow-auto h-[80%] w-[80%] bg-[#FFEAD0]">
 				<DialogHeader>
 					<DialogTitle className="mb-5 text-xl">Included features</DialogTitle>
 					<ul className="flex flex-col gap-4 overflow-auto">

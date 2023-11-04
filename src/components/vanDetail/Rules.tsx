@@ -22,7 +22,7 @@ export default function Rules({ van }: RulesProps) {
 	return (
 		<div className="py-5 border-b border-gray-300">
 			<h4 className="font-bold text-xl">Vehicle rules</h4>
-			<ul className="flex flex-col md:flex-row justify-between gap-4 py-5">
+			<ul className="flex flex-wrap justify-between gap-4 py-5">
 				{van.vehicle_rules.map((rule) => (
 					<li
 						key={rule}
