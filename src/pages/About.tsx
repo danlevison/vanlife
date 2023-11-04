@@ -14,7 +14,7 @@ export default function About() {
 				}}
 			/>
 			<div className="lg:pt-12">
-				<div className="max-w-[1240px] px-10 text-primaryText">
+				<div className="max-w-[1240px] px-8 text-primaryText">
 					<h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold py-8">
 						Don’t squeeze in a sedan when you could relax in a van.
 					</h1>

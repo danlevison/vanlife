@@ -1,38 +1,28 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { Link, useSearchParams } from "react-router-dom"
-import { fetchVanData } from "../../api"
-
-type VanType = {
-	created_at: string
-	description: string
-	hostId: string
-	id: number
-	imageURL: string
-	name: string
-	price: string
-	type: string
-	vanId: string
-}
+import VansDataContext from "../../context/VansDataContext"
+import { fetchVansData } from "../../api"
+// type
 
 export default function Vans() {
-	const [vans, setVans] = useState<VanType[] | null>(null)
+	const { vans, setVans } = useContext(VansDataContext)
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
 	const [searchParams, setSearchParams] = useSearchParams()
 	const vanTypeFilter = searchParams.get("type")
 
 	const vanTypeColour = {
-		simple: "#E17654",
-		rugged: "#115E59",
-		luxury: "#161616"
+		simple: "bg-[#E17654]",
+		rugged: "bg-[#115E59]",
+		luxury: "bg-[#161616]"
 	} as Record<string, string>
 
-	const loadVanData = async () => {
+	const loadVansData = async () => {
 		setLoading(true)
 		setError(null)
 
 		try {
-			const data = await fetchVanData()
+			const data = await fetchVansData()
 			setVans(data)
 		} catch (error) {
 			setError("It looks like something went wrong!")
@@ -43,7 +33,7 @@ export default function Vans() {
 	}
 
 	useEffect(() => {
-		loadVanData()
+		loadVansData()
 	}, [])
 
 	const displayedVans = vanTypeFilter
@@ -74,7 +64,7 @@ export default function Vans() {
 			<div className="flex flex-col items-center min-h-screen py-32">
 				<h1 className="text-center text-4xl pb-3">{error}</h1>
 				<button
-					onClick={loadVanData}
+					onClick={loadVansData}
 					className="px-3 py-2 bg-[#161616] text-white rounded-lg font-semibold"
 				>
 					Please try again
@@ -84,7 +74,7 @@ export default function Vans() {
 	}
 
 	return (
-		<div className="flex flex-col min-h-screen px-10 py-20">
+		<div className="flex flex-col min-h-screen max-w-[1440px] mx-auto px-8 py-20">
 			<h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-primaryText text-center md:text-left pt-8">
 				Explore our van options
 			</h1>
@@ -93,7 +83,7 @@ export default function Vans() {
 					onClick={() => handleFilterChange("type", "simple")}
 					className={`px-3 py-2 rounded-lg font-semibold ${
 						vanTypeFilter === "simple"
-							? `bg-[${vanTypeColour["simple"]}] text-[#FFEAD0]`
+							? `${vanTypeColour["simple"]} text-[#FFEAD0]`
 							: "bg-[#FFEAD0] text-primaryText"
 					}`}
 				>
@@ -103,7 +93,7 @@ export default function Vans() {
 					onClick={() => handleFilterChange("type", "luxury")}
 					className={`px-3 py-2 rounded-lg font-semibold ${
 						vanTypeFilter === "luxury"
-							? `bg-[${vanTypeColour["luxury"]}] text-[#FFEAD0]`
+							? `${vanTypeColour["luxury"]} text-[#FFEAD0]`
 							: "bg-[#FFEAD0] text-primaryText"
 					}`}
 				>
@@ -113,7 +103,7 @@ export default function Vans() {
 					onClick={() => handleFilterChange("type", "rugged")}
 					className={`px-3 py-2 rounded-lg font-semibold ${
 						vanTypeFilter === "rugged"
-							? `bg-[${vanTypeColour["rugged"]}] text-[#FFEAD0]`
+							? `${vanTypeColour["rugged"]} text-[#FFEAD0]`
 							: "bg-[#FFEAD0] text-primaryText"
 					}`}
 				>
@@ -129,25 +119,26 @@ export default function Vans() {
 				)}
 			</div>
 			<div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] justify-center items-center gap-10 w-full">
-				{displayedVans?.map((van: VanType) => (
+				{displayedVans?.map((van) => (
 					<div key={van.id}>
 						<Link to={van.vanId}>
 							<img
 								src={van.imageURL}
 								alt={`Photo of ${van.name} campervan`}
 								className="rounded-lg"
+								style={{ objectFit: "cover" }}
 							/>
 							<div className="flex justify-between items-center font-bold text-primaryText text-xl py-2">
 								<h3>{van.name}</h3>
 								<p>
-									${van.price}
-									<span className="font-normal text-lg">/day</span>
+									£{van.price}
+									<span className="font-normal text-lg">/night</span>
 								</p>
 							</div>
 							<i
-								className={`px-3 py-2 text-[#FFEAD0] rounded-lg font-semibold bg-[${
+								className={`px-3 py-2 text-[#FFEAD0] rounded-lg font-semibold ${
 									vanTypeColour[van.type.toLowerCase()] || "#00000"
-								}]`}
+								}`}
 							>
 								{van.type}
 							</i>
