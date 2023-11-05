@@ -1,6 +1,6 @@
 export default function Cancellation() {
 	return (
-		<div className="py-5 border-b border-gray-300">
+		<div className="pt-5">
 			<h4 className="font-bold text-xl">Cancellation policy</h4>
 			<h5 className="font-bold py-3">Our Flexible Cancellation Policy</h5>
 			<p className="leading-relaxed">

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme")
 module.exports = {
 	darkMode: ["class"],
 	content: [
@@ -16,6 +17,9 @@ module.exports = {
 			}
 		},
 		extend: {
+			fontFamily: {
+				jost: ['"Jost"', ...defaultTheme.fontFamily.sans]
+			},
 			colors: {
 				primaryText: "#161616",
 				orangeAccent: "#FF8C38",

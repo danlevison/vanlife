@@ -44,10 +44,10 @@ export default function Nav() {
 				<ul className="hidden md:flex gap-10 text-primaryText">
 					<li>
 						<NavLink
-							to="/"
+							to="vans"
 							className={({ isActive }) => (isActive ? activeStyles : "")}
 						>
-							Home
+							Our Vans
 						</NavLink>
 					</li>
 					<li>
@@ -60,10 +60,10 @@ export default function Nav() {
 					</li>
 					<li>
 						<NavLink
-							to="vans"
+							to="host"
 							className={({ isActive }) => (isActive ? activeStyles : "")}
 						>
-							Vans
+							Host
 						</NavLink>
 					</li>
 					<li>
@@ -71,7 +71,7 @@ export default function Nav() {
 							to="host"
 							className={({ isActive }) => (isActive ? activeStyles : "")}
 						>
-							Host
+							Sign In
 						</NavLink>
 					</li>
 				</ul>
@@ -94,16 +94,16 @@ export default function Nav() {
 					<ul className="flex flex-col gap-16 text-lg text-primaryText">
 						<li>
 							<NavLink
-								to="/"
+								to="vans"
 								onClick={handleNav}
 								className={({ isActive }) => (isActive ? activeStyles : "")}
 							>
-								Host
+								Our Vans
 							</NavLink>
 						</li>
 						<li>
 							<NavLink
-								to="/about"
+								to="about"
 								onClick={handleNav}
 								className={({ isActive }) => (isActive ? activeStyles : "")}
 							>
@@ -112,11 +112,20 @@ export default function Nav() {
 						</li>
 						<li>
 							<NavLink
-								to="vans"
+								to="host"
 								onClick={handleNav}
 								className={({ isActive }) => (isActive ? activeStyles : "")}
 							>
-								Vans
+								Host
+							</NavLink>
+						</li>
+						<li>
+							<NavLink
+								to="sign-in"
+								onClick={handleNav}
+								className={({ isActive }) => (isActive ? activeStyles : "")}
+							>
+								Sign In
 							</NavLink>
 						</li>
 					</ul>
