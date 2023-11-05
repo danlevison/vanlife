@@ -15,7 +15,7 @@ type FeaturesModalProps = {
 export default function FeaturesModal({ van }: FeaturesModalProps) {
 	return (
 		<Dialog>
-			<DialogTrigger className="text-orangeAccent flex gap-1 hover:bg-[#FFEAD0] p-2 rounded-lg mt-5">
+			<DialogTrigger className="text-primaryAccent flex gap-1 hover:bg-[#FFEAD0] p-2 rounded-lg mt-5">
 				Show more features
 			</DialogTrigger>
 			<DialogContent className="overflow-auto h-[80%] w-[80%] bg-[#FFEAD0]">

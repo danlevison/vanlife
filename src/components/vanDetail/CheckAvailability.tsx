@@ -11,7 +11,7 @@ export default function CheckAvailability({ van }: CheckAvailabilityProps) {
 	return (
 		<div className="border border-gray-300 rounded-md">
 			<div className="flex justify-between items-center border-b border-gray-300 p-4">
-				<p className=" text-purple-600">
+				<p className=" text-secondaryAccent">
 					From <span className="font-bold text-xl">£{van.price}</span> / night
 				</p>
 				<div className="flex items-center text-purple-700 text-sm">
@@ -21,7 +21,7 @@ export default function CheckAvailability({ van }: CheckAvailabilityProps) {
 			</div>
 			<div className="p-4">
 				<p className="text-sm font-bold mb-1">Dates</p>
-				<div className="flex items-center justify-between text-sm border border-gray-300 rounded-md p-3 mb-10 hover:border-purple-600 cursor-pointer">
+				<div className="flex items-center justify-between text-sm border border-gray-300 rounded-md p-3 mb-10 hover:border-secondaryAccent cursor-pointer">
 					<p className="flex items-center gap-1">
 						{" "}
 						<span>
@@ -37,7 +37,7 @@ export default function CheckAvailability({ van }: CheckAvailabilityProps) {
 					</span>
 					<p>When To Finish</p>
 				</div>
-				<button className="bg-orangeAccent rounded-md p-2 w-full sm:w-[300px] text-center text-lg text-white font-bold hover:opacity-70">
+				<button className="bg-primaryAccent rounded-md p-2 w-full sm:w-[300px] text-center text-lg text-white font-bold hover:opacity-70">
 					Check availability
 				</button>
 			</div>

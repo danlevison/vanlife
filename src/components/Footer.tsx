@@ -19,7 +19,7 @@ export default function Footer() {
 							<li>
 								<Link
 									to={"about"}
-									className="tracking-wide hover:text-orangeAccent cursor-pointer duration-300"
+									className="tracking-wide hover:text-primaryAccent cursor-pointer duration-300"
 								>
 									About us
 								</Link>
@@ -27,15 +27,23 @@ export default function Footer() {
 							<li>
 								<Link
 									to={"vans"}
-									className="tracking-wide hover:text-orangeAccent cursor-pointer duration-300"
+									className="tracking-wide hover:text-primaryAccent cursor-pointer duration-300"
 								>
 									Campervan hire
 								</Link>
 							</li>
 							<li>
 								<Link
+									to={"host"}
+									className="tracking-wide hover:text-primaryAccent cursor-pointer duration-300"
+								>
+									List my camper
+								</Link>
+							</li>
+							<li>
+								<Link
 									to={"contact-us"}
-									className="tracking-wide hover:text-orangeAccent cursor-pointer duration-300"
+									className="tracking-wide hover:text-primaryAccent cursor-pointer duration-300"
 								>
 									Contact us
 								</Link>
@@ -45,16 +53,16 @@ export default function Footer() {
 					<div>
 						<h3 className="text-2xl font-bold">FAQ's</h3>
 						<ul className="flex flex-col gap-4 mt-7">
-							<li className="cursor-pointer hover:text-orangeAccent duration-300">
+							<li className="cursor-pointer hover:text-primaryAccent duration-300">
 								How renting a campervan works
 							</li>
-							<li className="cursor-pointer hover:text-orangeAccent duration-300">
+							<li className="cursor-pointer hover:text-primaryAccent duration-300">
 								Can I get a discount for last-minute hire?
 							</li>
-							<li className="cursor-pointer hover:text-orangeAccent duration-300">
+							<li className="cursor-pointer hover:text-primaryAccent duration-300">
 								What if I need to cancel?
 							</li>
-							<li className="cursor-pointer hover:text-orangeAccent duration-300">
+							<li className="cursor-pointer hover:text-primaryAccent duration-300">
 								More FAQ's
 							</li>
 						</ul>
@@ -86,11 +94,11 @@ export default function Footer() {
 									type="email"
 									id="email"
 									placeholder="E-mail"
-									className="bg-transparent p-3 outline-none border border-gray-400 w-full rounded-md hover:border-purple-600 duration-150"
+									className="bg-transparent p-3 outline-none border border-gray-400 w-full rounded-md hover:border-secondaryAccent duration-150"
 									aria-required
 									required
 								/>
-								<button className="w-full md:w-[250px] border border-orangeAccent p-3 text-orangeAccent uppercase font-bold tracking-widest rounded-md">
+								<button className="w-full md:w-[250px] border border-primaryAccent p-3 text-primaryAccent uppercase font-bold tracking-widest rounded-md">
 									Subscribe
 								</button>
 							</div>

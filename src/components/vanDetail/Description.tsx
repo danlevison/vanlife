@@ -27,7 +27,7 @@ export default function Description({ van }: DescriptionProps) {
 				))}
 				<button
 					onClick={() => setShowMore(!showMore)}
-					className="text-orangeAccent flex gap-1 hover:bg-[#FFEAD0] p-2 rounded-lg"
+					className="text-primaryAccent flex gap-1 hover:bg-[#FFEAD0] p-2 rounded-lg"
 				>
 					{showMore ? "Show less" : "Show more"}
 					<span>

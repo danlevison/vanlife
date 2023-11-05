@@ -5,7 +5,8 @@ import { AiOutlineClose } from "react-icons/ai"
 
 export default function Nav() {
 	const [nav, setNav] = useState(false)
-	const activeStyles = "underline font-semibold"
+	const activeStyles =
+		"border-b-2 border-black font-semibold py-1 hover:text-secondaryAccent hover:border-b-2 hover:border-secondaryAccent"
 
 	const handleNav = () => {
 		setNav(!nav)
@@ -45,7 +46,11 @@ export default function Nav() {
 					<li>
 						<NavLink
 							to="vans"
-							className={({ isActive }) => (isActive ? activeStyles : "")}
+							className={({ isActive }) =>
+								isActive
+									? activeStyles
+									: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
+							}
 						>
 							Our Vans
 						</NavLink>
@@ -53,7 +58,11 @@ export default function Nav() {
 					<li>
 						<NavLink
 							to="about"
-							className={({ isActive }) => (isActive ? activeStyles : "")}
+							className={({ isActive }) =>
+								isActive
+									? activeStyles
+									: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
+							}
 						>
 							About
 						</NavLink>
@@ -61,7 +70,11 @@ export default function Nav() {
 					<li>
 						<NavLink
 							to="host"
-							className={({ isActive }) => (isActive ? activeStyles : "")}
+							className={({ isActive }) =>
+								isActive
+									? activeStyles
+									: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
+							}
 						>
 							Host
 						</NavLink>
@@ -69,7 +82,11 @@ export default function Nav() {
 					<li>
 						<NavLink
 							to="host"
-							className={({ isActive }) => (isActive ? activeStyles : "")}
+							className={({ isActive }) =>
+								isActive
+									? activeStyles
+									: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
+							}
 						>
 							Sign In
 						</NavLink>
@@ -96,7 +113,11 @@ export default function Nav() {
 							<NavLink
 								to="vans"
 								onClick={handleNav}
-								className={({ isActive }) => (isActive ? activeStyles : "")}
+								className={({ isActive }) =>
+									isActive
+										? activeStyles
+										: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
+								}
 							>
 								Our Vans
 							</NavLink>
@@ -105,7 +126,11 @@ export default function Nav() {
 							<NavLink
 								to="about"
 								onClick={handleNav}
-								className={({ isActive }) => (isActive ? activeStyles : "")}
+								className={({ isActive }) =>
+									isActive
+										? activeStyles
+										: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
+								}
 							>
 								About
 							</NavLink>
@@ -114,7 +139,11 @@ export default function Nav() {
 							<NavLink
 								to="host"
 								onClick={handleNav}
-								className={({ isActive }) => (isActive ? activeStyles : "")}
+								className={({ isActive }) =>
+									isActive
+										? activeStyles
+										: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
+								}
 							>
 								Host
 							</NavLink>
@@ -123,7 +152,11 @@ export default function Nav() {
 							<NavLink
 								to="sign-in"
 								onClick={handleNav}
-								className={({ isActive }) => (isActive ? activeStyles : "")}
+								className={({ isActive }) =>
+									isActive
+										? activeStyles
+										: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
+								}
 							>
 								Sign In
 							</NavLink>

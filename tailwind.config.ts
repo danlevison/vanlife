@@ -22,7 +22,8 @@ module.exports = {
 			},
 			colors: {
 				primaryText: "#161616",
-				orangeAccent: "#FF8C38",
+				primaryAccent: "#FF8C38",
+				secondaryAccent: "#9233ea",
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
