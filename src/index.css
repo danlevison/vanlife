@@ -56,4 +56,8 @@
 	body {
 		@apply bg-background text-foreground font-jost;
 	}
+	html,
+	body {
+		@apply w-screen !overflow-x-hidden;
+	}
 }
