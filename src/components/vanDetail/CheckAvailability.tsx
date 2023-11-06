@@ -33,11 +33,14 @@ export default function CheckAvailability({ van }: CheckAvailabilityProps) {
 						When To Go
 					</p>
 					<span>
-						<BsArrowRight size={20} />
+						<BsArrowRight
+							size={20}
+							className="mx-2"
+						/>
 					</span>
 					<p>When To Finish</p>
 				</div>
-				<button className="bg-primaryAccent rounded-md p-2 w-full sm:w-[300px] text-center text-lg text-white font-bold hover:opacity-70">
+				<button className="bg-accent rounded-md p-2 w-full sm:w-[300px] text-center text-lg text-white font-bold hover:opacity-70">
 					Check availability
 				</button>
 			</div>

@@ -22,12 +22,11 @@ module.exports = {
 			},
 			colors: {
 				primaryText: "#161616",
-				primaryAccent: "#FF8C38",
 				secondaryAccent: "#9233ea",
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
-				background: "#FFF7ED",
+				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
 				primary: {
 					DEFAULT: "hsl(var(--primary))",

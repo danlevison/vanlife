@@ -19,7 +19,7 @@ export default function CampervanDisplay() {
 					</p>
 					<Link
 						to="vans"
-						className="bg-primaryAccent rounded-md p-3 w-full text-center text-white text-lg font-bold hover:opacity-70 duration-300"
+						className="bg-accent rounded-md p-3 w-full text-center text-white text-lg font-bold hover:opacity-70 duration-300"
 					>
 						Find your van
 					</Link>
@@ -47,7 +47,7 @@ export default function CampervanDisplay() {
 					</p>
 					<Link
 						to="vans"
-						className="bg-primaryAccent rounded-md p-3 w-full text-center text-white text-lg font-bold hover:opacity-70 duration-300"
+						className="bg-accent rounded-md p-3 w-full text-center text-white text-lg font-bold hover:opacity-70 duration-300"
 					>
 						Rent out my campervan
 					</Link>

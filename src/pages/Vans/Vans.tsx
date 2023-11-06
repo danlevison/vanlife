@@ -1,7 +1,9 @@
 import { useState, useEffect, useContext } from "react"
-import { Link, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import VansDataContext from "../../context/VansDataContext"
 import { fetchVansData } from "../../api"
+import VanCard from "@/components/vans/VanCard"
+import Loading from "@/components/Loading"
 // type
 
 export default function Vans() {
@@ -49,14 +51,6 @@ export default function Vans() {
 			}
 			return prevParams
 		})
-	}
-
-	if (loading) {
-		return (
-			<div className="min-h-screen py-32">
-				<h1 className="text-center text-4xl">Loading...</h1>
-			</div>
-		)
 	}
 
 	if (error) {
@@ -118,34 +112,19 @@ export default function Vans() {
 					</button>
 				)}
 			</div>
-			<div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] justify-center items-center gap-10 w-full">
-				{displayedVans?.map((van) => (
-					<div key={van.id}>
-						<Link to={van.vanId}>
-							<img
-								src={van.imageURL}
-								alt={`Photo of ${van.name} campervan`}
-								className="rounded-lg"
-								style={{ objectFit: "cover" }}
-							/>
-							<div className="flex justify-between items-center font-bold text-primaryText text-xl py-2">
-								<h3>{van.name}</h3>
-								<p>
-									£{van.price}
-									<span className="font-normal text-lg">/night</span>
-								</p>
-							</div>
-							<i
-								className={`px-3 py-2 text-[#FFEAD0] rounded-lg font-semibold ${
-									vanTypeColour[van.type.toLowerCase()] || "#00000"
-								}`}
-							>
-								{van.type}
-							</i>
-						</Link>
-					</div>
-				))}
-			</div>
+			{loading ? (
+				<Loading />
+			) : (
+				<div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] justify-center items-center gap-10 w-full">
+					{displayedVans?.map((van) => (
+						<VanCard
+							key={van.id}
+							van={van}
+							vanTypeColour={vanTypeColour}
+						/>
+					))}
+				</div>
+			)}
 		</div>
 	)
 }

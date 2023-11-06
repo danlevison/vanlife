@@ -13,6 +13,7 @@ import CheckAvailability from "../../components/vanDetail/CheckAvailability"
 import Cancellation from "../../components/vanDetail/Cancellation"
 //types
 import { VanType } from "../../types/vanType"
+import { Badge } from "@/components/ui/badge"
 
 export default function VanDetail() {
 	const { vans } = useContext(VansDataContext)
@@ -100,13 +101,13 @@ export default function VanDetail() {
 					</h1>
 					<div className="flex flex-col md:flex-row justify-between items-start gap-10">
 						<div className="w-full pt-10">
-							<i
-								className={`px-3 py-2 text-[#FFEAD0] rounded-lg font-semibold ${
+							<Badge
+								className={`px-3 py-2 text-[#FFEAD0] rounded-lg font-semibold text-base ${
 									vanTypeColour[van.type.toLowerCase()] || "#00000"
 								}`}
 							>
 								{van.type}
-							</i>
+							</Badge>
 							<Overview van={van} />
 							<Description van={van} />
 							<Features van={van} />
