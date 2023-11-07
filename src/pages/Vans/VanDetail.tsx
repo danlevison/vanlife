@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import VansDataContext from "../../context/VansDataContext"
 import { fetchVanData } from "@/api"
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useLocation } from "react-router-dom"
 import { BsArrowLeft } from "react-icons/bs"
 import Overview from "../../components/vanDetail/Overview"
 import ImageHeader from "../../components/vanDetail/ImageHeader"
@@ -19,6 +19,7 @@ export default function VanDetail() {
 	const { vans } = useContext(VansDataContext)
 	const [van, setVan] = useState<VanType | null>(null)
 	const { id } = useParams()
+	const { state } = useLocation()
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
 
@@ -38,6 +39,8 @@ export default function VanDetail() {
 		}
 	}, [id, vans])
 
+	// fetch van of id(x) if vans is null
+	// e.g. if a user navigates from "/"" to "/vans/1" without visiting the "/vans" page where the vans data is fetched
 	useEffect(() => {
 		if (!vans && id) {
 			const loadVan = async () => {
@@ -83,7 +86,7 @@ export default function VanDetail() {
 		<div className="min-h-screen mx-auto px-8 py-20">
 			<div className="flex items-center gap-2 pb-2">
 				<Link
-					to={".."}
+					to={state.search ? `..${state.search}` : ".."}
 					relative="path"
 					className="order-1 underline"
 				>

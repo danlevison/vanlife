@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
 import VansDataContext from "../../context/VansDataContext"
 import { PiCaretDownLight } from "react-icons/pi"
+import { RiCloseFill } from "react-icons/ri"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -20,11 +21,15 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 	const { vans } = useContext(VansDataContext)
 	const [searchParams, setSearchParams] = useSearchParams()
 	const vanTypeFilter = searchParams.get("type")
-	const vanPriceFilter = searchParams.get("price")
-	const params: string[] = []
+	const sortByFilter = searchParams.get("sort_by")
+	const paramsKey: string[] = []
+	const paramsValue: string[] = []
 
-	searchParams.forEach((_, key) => {
-		params.push(key)
+	searchParams.forEach((value, key) => {
+		if (key === "type") {
+			paramsKey.push(key)
+			paramsValue.push(value)
+		}
 	})
 
 	const filterByType = (
@@ -37,18 +42,25 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 		return vans.filter((van) => van.type.toLowerCase() === typeSortParam)
 	}
 
-	const filterByPrice = (
+	const sortByPrice = (
 		vans: VanType[],
-		priceSortParam: string | null
+		sortByFilter: string | null
 	): VanType[] => {
-		if (!priceSortParam) {
+		if (!sortByFilter) {
 			return vans
 		}
 
-		if (priceSortParam === "LH") {
+		if (sortByFilter === "LH") {
 			return [...vans].sort((a, b) => parseInt(a.price) - parseInt(b.price))
-		} else if (priceSortParam === "HL") {
+		} else if (sortByFilter === "HL") {
 			return [...vans].sort((a, b) => parseInt(b.price) - parseInt(a.price))
+		} else if (sortByFilter === "rating") {
+			return [...vans].sort((a, b) => {
+				const ratingA = a.rating || 0
+				const ratingB = b.rating || 0
+
+				return ratingB - ratingA
+			})
 		}
 
 		return vans
@@ -68,16 +80,13 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 	useEffect(() => {
 		if (vans) {
 			const filteredByType = filterByType(vans, vanTypeFilter)
-			const filteredByTypeAndPrice = filterByPrice(
-				filteredByType,
-				vanPriceFilter
-			)
-			setFilteredVans(filteredByTypeAndPrice)
+			const sortedByPrice = sortByPrice(filteredByType, sortByFilter)
+			setFilteredVans(sortedByPrice)
 		}
-	}, [vanTypeFilter, vanPriceFilter, vans, setFilteredVans])
+	}, [vanTypeFilter, sortByFilter, vans, setFilteredVans])
 
 	return (
-		<div className="flex justify-between items-center">
+		<div className="border-b border-gray-300 mb-4">
 			<div className="flex flex-wrap items-center gap-4 py-8">
 				<button
 					onClick={() => handleFilterChange("type", "simple")}
@@ -109,37 +118,57 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 				>
 					Rugged
 				</button>
-				{vanTypeFilter && (
+				<DropdownMenu>
+					<DropdownMenuTrigger className="px-3 py-2 rounded-lg font-semibold bg-[#FFEAD0] text-primaryText">
+						Sort by{" "}
+						<PiCaretDownLight
+							size={20}
+							className="inline-block "
+						/>
+					</DropdownMenuTrigger>
+					<DropdownMenuContent>
+						<DropdownMenuItem>
+							<button
+								className="w-full text-left"
+								onClick={() => handleFilterChange("sort_by", "rating")}
+							>
+								Rating
+							</button>
+						</DropdownMenuItem>
+						<DropdownMenuItem>
+							<button
+								className="w-full text-left"
+								onClick={() => handleFilterChange("sort_by", "HL")}
+							>
+								Price: High - Low
+							</button>
+						</DropdownMenuItem>
+						<DropdownMenuItem>
+							<button
+								className="w-full text-left"
+								onClick={() => handleFilterChange("sort_by", "LH")}
+							>
+								Price: Low - High
+							</button>
+						</DropdownMenuItem>
+					</DropdownMenuContent>
+				</DropdownMenu>
+			</div>
+			<div className="flex items-center gap-3 pb-2 text-primaryText">
+				<p>
+					{paramsKey.length} {paramsKey.length === 1 ? "Filter" : "Filters"}
+				</p>
+				{paramsKey.length > 0 && (
 					<button
 						onClick={() => handleFilterChange("type", null)}
-						className="px-3 py-2 underline"
+						className="group px-2 py-1 bg-gray-200 rounded-md text-sm hover:bg-accent hover:text-white"
 					>
-						Clear filters
+						{paramsValue.toString().charAt(0).toUpperCase() +
+							paramsValue.toString().slice(1)}{" "}
+						<RiCloseFill className="inline-block" />
 					</button>
 				)}
 			</div>
-
-			<DropdownMenu>
-				<DropdownMenuTrigger>
-					Sort by{" "}
-					<PiCaretDownLight
-						size={20}
-						className="inline-block"
-					/>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent>
-					<DropdownMenuItem>
-						<button onClick={() => handleFilterChange("price", "HL")}>
-							Price: High - Low
-						</button>
-					</DropdownMenuItem>
-					<DropdownMenuItem>
-						<button onClick={() => handleFilterChange("price", "LH")}>
-							Price: Low - High
-						</button>
-					</DropdownMenuItem>
-				</DropdownMenuContent>
-			</DropdownMenu>
 		</div>
 	)
 }

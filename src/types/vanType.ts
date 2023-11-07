@@ -21,6 +21,7 @@ export type VanType = {
 	name: string
 	overview: string[]
 	price: string
+	rating: number | null
 	type: string
 	vanId: string
 	vehicle_description: string[]
