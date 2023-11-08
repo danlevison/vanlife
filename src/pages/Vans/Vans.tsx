@@ -7,9 +7,10 @@ import Filters from "@/components/vans/Filters"
 import { VanType } from "@/types/vanType"
 
 export default function Vans() {
-	const { setVans } = useContext(VansDataContext)
+	const { vans, setVans } = useContext(VansDataContext)
 	const [filteredVans, setFilteredVans] = useState<VanType[] | null>([])
 	const [loading, setLoading] = useState(false)
+	const [imageLoaded, setImageLoaded] = useState(false)
 	const [error, setError] = useState<string | null>(null)
 
 	const vanTypeColour = {
@@ -37,6 +38,25 @@ export default function Vans() {
 		loadVansData()
 	}, [])
 
+	useEffect(() => {
+		if (vans) {
+			const imagePromises = vans.map((van) => {
+				return new Promise<void>((resolve) => {
+					const image = new Image()
+					image.onload = () => {
+						setImageLoaded(true)
+						resolve()
+					}
+					image.src = van.imageURL
+				})
+			})
+
+			Promise.all(imagePromises)
+				.then(() => setImageLoaded(true))
+				.catch((error) => console.error(error))
+		}
+	}, [vans])
+
 	if (error) {
 		return (
 			<div className="flex flex-col items-center min-h-screen py-32">
@@ -60,7 +80,7 @@ export default function Vans() {
 				vanTypeColour={vanTypeColour}
 				setFilteredVans={setFilteredVans}
 			/>
-			{loading ? (
+			{loading && !imageLoaded ? (
 				<Loading />
 			) : (
 				<div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] justify-center items-center gap-10 w-full">

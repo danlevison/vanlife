@@ -29,6 +29,8 @@ export default function VanDetail() {
 		luxury: "bg-[#161616]"
 	} as Record<string, string>
 
+	const search = state?.search || ""
+
 	useEffect(() => {
 		if (id) {
 			const getVan = (vanId: string) => {
@@ -86,7 +88,7 @@ export default function VanDetail() {
 		<div className="min-h-screen mx-auto px-8 py-20">
 			<div className="flex items-center gap-2 pb-2">
 				<Link
-					to={state.search ? `..${state.search}` : ".."}
+					to={`..${search}`}
 					relative="path"
 					className="order-1 underline"
 				>

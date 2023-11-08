@@ -28,6 +28,7 @@ export default function CampervanDisplay() {
 					<img
 						src={campervan}
 						alt="Photo of a campervan in the forest"
+						loading="lazy"
 						className="w-full lg:max-w-[600px] rounded-t-lg lg:rounded-lg"
 						style={{ objectFit: "cover" }}
 					/>
@@ -56,6 +57,7 @@ export default function CampervanDisplay() {
 					<img
 						src={people}
 						alt="Photo of a campervan in the forest"
+						loading="lazy"
 						className="w-full lg:max-w-[600px] rounded-t-lg lg:rounded-lg"
 						style={{ objectFit: "cover" }}
 					/>

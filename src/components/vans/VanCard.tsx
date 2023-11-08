@@ -21,6 +21,7 @@ export default function VanCard({ van, vanTypeColour }: VanCardProps) {
 				<img
 					src={van.imageURL}
 					alt={`Photo of ${van.name} campervan`}
+					loading="lazy"
 					className="rounded-t-lg"
 					style={{ objectFit: "cover" }}
 				/>
