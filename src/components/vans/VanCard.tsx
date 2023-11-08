@@ -4,27 +4,40 @@ import { Badge } from "@/components/ui/badge"
 import { AiFillStar } from "react-icons/ai"
 // types
 import { VanType } from "@/types/vanType"
+import SkeletonCard from "../ui/SkeletonCard"
 
 type VanCardProps = {
 	van: VanType
 	vanTypeColour: Record<string, string>
+	loading: boolean
+	imageLoading: boolean
 }
 
-export default function VanCard({ van, vanTypeColour }: VanCardProps) {
+export default function VanCard({
+	van,
+	vanTypeColour,
+	loading,
+	imageLoading
+}: VanCardProps) {
 	const [searchParams] = useSearchParams()
-	return (
+
+	return loading || imageLoading ? (
+		<SkeletonCard />
+	) : (
 		<Link
 			to={van.vanId}
 			state={{ search: `?${searchParams.toString()}` }}
 		>
-			<Card className="text-primaryText">
-				<img
-					src={van.imageURL}
-					alt={`Photo of ${van.name} campervan`}
-					loading="lazy"
-					className="rounded-t-lg"
-					style={{ objectFit: "cover" }}
-				/>
+			<Card className="text-primaryText min-h-[312px]">
+				<div className="h-full">
+					<img
+						src={van.imageURL}
+						alt={`Photo of ${van.name} campervan`}
+						loading="lazy"
+						className="rounded-t-lg h-full min-h-[312px]"
+						style={{ objectFit: "cover" }}
+					/>
+				</div>
 				<div className="flex justify-between font-bold text-xl px-2 py-3">
 					<CardTitle className="text-xl">{van.name}</CardTitle>
 					<CardContent className="p-0">

@@ -1,8 +1,7 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect, useContext, useCallback } from "react"
 import VansDataContext from "../../context/VansDataContext"
 import { fetchVansData } from "../../api"
 import VanCard from "@/components/vans/VanCard"
-import Loading from "@/components/Loading"
 import Filters from "@/components/vans/Filters"
 import { VanType } from "@/types/vanType"
 
@@ -10,7 +9,7 @@ export default function Vans() {
 	const { vans, setVans } = useContext(VansDataContext)
 	const [filteredVans, setFilteredVans] = useState<VanType[] | null>([])
 	const [loading, setLoading] = useState(false)
-	const [imageLoaded, setImageLoaded] = useState(false)
+	const [imageLoading, setImageLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
 
 	const vanTypeColour = {
@@ -19,8 +18,9 @@ export default function Vans() {
 		luxury: "bg-[#161616]"
 	} as Record<string, string>
 
-	const loadVansData = async () => {
+	const loadVansData = useCallback(async () => {
 		setLoading(true)
+		setImageLoading(true)
 		setError(null)
 
 		try {
@@ -32,11 +32,11 @@ export default function Vans() {
 		} finally {
 			setLoading(false)
 		}
-	}
+	}, [setVans])
 
 	useEffect(() => {
 		loadVansData()
-	}, [])
+	}, [loadVansData])
 
 	useEffect(() => {
 		if (vans) {
@@ -44,7 +44,6 @@ export default function Vans() {
 				return new Promise<void>((resolve) => {
 					const image = new Image()
 					image.onload = () => {
-						setImageLoaded(true)
 						resolve()
 					}
 					image.src = van.imageURL
@@ -52,7 +51,7 @@ export default function Vans() {
 			})
 
 			Promise.all(imagePromises)
-				.then(() => setImageLoaded(true))
+				.then(() => setImageLoading(false))
 				.catch((error) => console.error(error))
 		}
 	}, [vans])
@@ -80,19 +79,18 @@ export default function Vans() {
 				vanTypeColour={vanTypeColour}
 				setFilteredVans={setFilteredVans}
 			/>
-			{loading && !imageLoaded ? (
-				<Loading />
-			) : (
-				<div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] justify-center items-center gap-10 w-full">
-					{filteredVans?.map((van) => (
-						<VanCard
-							key={van.id}
-							van={van}
-							vanTypeColour={vanTypeColour}
-						/>
-					))}
-				</div>
-			)}
+
+			<div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] justify-center items-center gap-10 w-full">
+				{filteredVans?.map((van) => (
+					<VanCard
+						key={van.id}
+						van={van}
+						vanTypeColour={vanTypeColour}
+						loading={loading}
+						imageLoading={imageLoading}
+					/>
+				))}
+			</div>
 		</div>
 	)
 }
