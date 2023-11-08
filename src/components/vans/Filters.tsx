@@ -127,25 +127,25 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 						/>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent>
-						<DropdownMenuItem>
+						<DropdownMenuItem className="p-0">
 							<button
-								className="w-full text-left"
+								className="w-full text-left px-2 py-1.5"
 								onClick={() => handleFilterChange("sort_by", "rating")}
 							>
 								Rating
 							</button>
 						</DropdownMenuItem>
-						<DropdownMenuItem>
+						<DropdownMenuItem className="p-0">
 							<button
-								className="w-full text-left"
+								className="w-full text-left px-2 py-1.5"
 								onClick={() => handleFilterChange("sort_by", "HL")}
 							>
 								Price: High - Low
 							</button>
 						</DropdownMenuItem>
-						<DropdownMenuItem>
+						<DropdownMenuItem className="p-0">
 							<button
-								className="w-full text-left"
+								className="w-full text-left px-2 py-1.5"
 								onClick={() => handleFilterChange("sort_by", "LH")}
 							>
 								Price: Low - High
