@@ -120,6 +120,7 @@ export default function Footer() {
 								<img
 									src={visa}
 									alt="Visa logo"
+									loading="lazy"
 									className="w-[35px]"
 								/>
 							</li>
@@ -127,6 +128,7 @@ export default function Footer() {
 								<img
 									src={mastercard}
 									alt="Mastercard logo"
+									loading="lazy"
 									className="w-[35px]"
 								/>
 							</li>
@@ -134,6 +136,7 @@ export default function Footer() {
 								<img
 									src={amex}
 									alt="American Express logo"
+									loading="lazy"
 									className="w-[35px]"
 								/>
 							</li>
@@ -141,6 +144,7 @@ export default function Footer() {
 								<img
 									src={paypal}
 									alt="PayPal logo"
+									loading="lazy"
 									className="w-[40px]"
 								/>
 							</li>

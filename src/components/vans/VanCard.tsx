@@ -29,15 +29,14 @@ export default function VanCard({
 			state={{ search: `?${searchParams.toString()}` }}
 		>
 			<Card className="text-primaryText min-h-[312px]">
-				<div className="h-full">
-					<img
-						src={van.imageURL}
-						alt={`Photo of ${van.name} campervan`}
-						loading="lazy"
-						className="rounded-t-lg h-full min-h-[312px]"
-						style={{ objectFit: "cover" }}
-					/>
-				</div>
+				<img
+					src={van.imageURL}
+					alt={`Photo of ${van.name} campervan`}
+					loading="lazy"
+					className="rounded-t-lg min-h-[312px]"
+					style={{ objectFit: "cover" }}
+				/>
+
 				<div className="flex justify-between font-bold text-xl px-2 py-3">
 					<CardTitle className="text-xl">{van.name}</CardTitle>
 					<CardContent className="p-0">

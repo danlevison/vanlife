@@ -4,7 +4,7 @@ import { Card, CardFooter } from "@/components/ui/card"
 export default function SkeletonCard() {
 	return (
 		<Card className="flex flex-col w-full min-h-[312px]">
-			<div className="w-full flex flex-grow h-full min-h-[312px]">
+			<div className="w-full flex flex-grow min-h-[312px]">
 				<Skeleton className="w-full" />
 			</div>
 			<div className="w-full h-[95px] flex-none">
