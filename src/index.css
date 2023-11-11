@@ -22,7 +22,7 @@
 		--destructive-foreground: 60 9.1% 97.8%;
 		--border: 20 5.9% 90%;
 		--input: 20 5.9% 90%;
-		--ring: 24.6 95% 53.1%;
+		--ring: 271, 81%, 56%;
 		--radius: 0.5rem;
 	}
 
@@ -54,10 +54,16 @@
 		@apply border-border;
 	}
 	body {
-		@apply bg-background text-foreground font-jost;
+		@apply bg-background text-primaryText font-jost;
 	}
 	html,
 	body {
 		@apply w-screen !overflow-x-hidden;
+	}
+	h1,
+	h2,
+	h3,
+	h4 {
+		@apply font-bold;
 	}
 }

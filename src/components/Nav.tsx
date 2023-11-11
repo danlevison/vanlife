@@ -38,7 +38,7 @@ export default function Nav() {
 				<Link
 					onClick={() => setNav(false)}
 					to="/"
-					className="text-2xl font-bold uppercase"
+					className="text-primaryText text-2xl font-bold uppercase"
 				>
 					#VanLife
 				</Link>
@@ -53,18 +53,6 @@ export default function Nav() {
 							}
 						>
 							Our Vans
-						</NavLink>
-					</li>
-					<li>
-						<NavLink
-							to="about"
-							className={({ isActive }) =>
-								isActive
-									? activeStyles
-									: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
-							}
-						>
-							About
 						</NavLink>
 					</li>
 					<li>
@@ -120,19 +108,6 @@ export default function Nav() {
 								}
 							>
 								Our Vans
-							</NavLink>
-						</li>
-						<li>
-							<NavLink
-								to="about"
-								onClick={handleNav}
-								className={({ isActive }) =>
-									isActive
-										? activeStyles
-										: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
-								}
-							>
-								About
 							</NavLink>
 						</li>
 						<li>

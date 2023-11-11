@@ -3,43 +3,84 @@ import campervanImg from "../assets/about-img.jpg"
 
 export default function About() {
 	return (
-		<div className="lg:grid grid-cols-2 justify-center items-center min-h-screen">
-			<img
-				src={campervanImg}
-				alt="Photo of a campervan next to a lake at sunset"
-				className="order-1 w-full h-[500px] lg:h-full"
-				style={{
-					objectFit: "cover",
-					objectPosition: "center"
-				}}
-			/>
-			<div className="lg:pt-12">
+		<div className="flex flex-col items-center min-h-screen">
+			<div className="relative top-16 md:top-0 w-full">
+				<div className="absolute inset-0 bg-black/40" />
+				<h1 className="absolute w-full top-[50%] left-[50%] translate-x-[-50%] md:w-auto md:translate-x-0 md:left-40 text-white text-center text-4xl sm:text-5xl md:text-6xl">
+					About us
+				</h1>
+				<img
+					src={campervanImg}
+					alt="Photo of a campervan next to a lake at sunset"
+					className="max-h-[500px] w-full"
+					style={{
+						objectFit: "cover",
+						objectPosition: "center"
+					}}
+				/>
+			</div>
+
+			<div className="pt-14 md:pt-0">
 				<div className="max-w-[1240px] px-8 text-primaryText">
-					<h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold py-8">
+					<h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold py-10">
 						Don’t squeeze in a sedan when you could relax in a van.
-					</h1>
-					<p className="mb-6 sm:text-lg leading-snug">
-						Our mission is to enliven your road trip with the perfect travel van
-						rental. Our vans are recertified before each trip to ensure your
-						travel plans can go off without a hitch. (Hitch costs extra 😉)
-					</p>
-					<p className="sm:text-lg leading-snug">
-						Our team is full of vanlife enthusiasts who know first-hand the
-						magic of touring the world on 4 wheels.
-					</p>
-				</div>
-				<div className="flex flex-col gap-6 lg:max-w-[600px] bg-[#FFCC8D] rounded-md p-6 m-10 text-primaryText font-bold">
-					<h2 className="text-2xl sm:text-3xl md:text-4xl">
-						Your destination is waiting.
-						<br />
-						Your van is ready.
 					</h2>
-					<Link
-						className="w-full sm:w-44 bg-primaryText rounded-xl p-3 text-white text-center"
-						to="/vans"
-					>
-						Explore our vans
-					</Link>
+					<p className="mb-6 sm:text-lg leading-snug">
+						Welcome to <span className="font-bold">#VANLIFE</span>, your
+						one-stop destination for campervan adventures. Whether you're a
+						seasoned campervan enthusiast or a curious newcomer, we're here to
+						make your road trip dreams a reality.
+					</p>
+					<p className="mb-6 sm:text-lg leading-snug">
+						At #VANLIFE, we believe in the transformative power of van life.
+						It's an opportunity to escape the ordinary, embrace the open road,
+						and connect with nature on a deeper level. It's about forging new
+						paths, discovering hidden gems, and creating memories that will last
+						a lifetime.
+					</p>
+					<h3 className="text-lg">Rent a Campervan</h3>
+					<p className="sm:text-lg leading-snug mb-6">
+						Our comprehensive fleet of campervans caters to every need and
+						budget. From compact pop-top vans to spacious motorhomes, we have
+						the perfect vehicle to suit your adventure plans. Each campervan is
+						meticulously maintained and equipped with all the essentials for a
+						comfortable and enjoyable journey.
+					</p>
+					<h3 className="text-lg">Host Your Campervan</h3>
+					<p className="sm:text-lg leading-snug mb-6">
+						If you own a campervan that's not in constant use, why not share it
+						with others and earn some extra income? With #VANLIFE, you can list
+						your campervan for rent and reach a wide network of potential
+						renters. We handle the booking process, payments, and insurance, so
+						you can sit back and relax while earning passive income.
+					</p>
+					<h3 className="text-lg">Our Community</h3>
+					<p className="sm:text-lg leading-snug mb-6">
+						Join our vibrant community of campervan enthusiasts and connect with
+						fellow adventurers. Share your experiences, exchange tips, and
+						discover new destinations along the way. We're here to support you
+						every step of your van life journey.
+					</p>
+					<h3 className="text-lg">Embrace the #VANLIFE Experience</h3>
+					<p className="sm:text-lg leading-snug mb-10">
+						#VANLIFE is more than just renting a campervan; it's a lifestyle.
+						It's about embracing the freedom of the open road, exploring new
+						horizons, and living life on your own terms. Let us be your guide as
+						you embark on your unforgettable #VANLIFE adventure.
+					</p>
+					<div className="flex flex-col gap-6 w-full max-w-[600px] bg-[#FFCC8D] rounded-md p-6 text-primaryText text-center sm:text-left font-bold">
+						<h2 className="text-2xl sm:text-3xl md:text-4xl">
+							Your destination is waiting.
+							<br />
+							Your van is ready.
+						</h2>
+						<Link
+							className="w-full sm:w-44 bg-primaryText rounded-xl p-3 text-white text-center"
+							to="/vans"
+						>
+							Explore our vans
+						</Link>
+					</div>
 				</div>
 			</div>
 		</div>

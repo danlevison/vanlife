@@ -6,6 +6,7 @@ import About from "./pages/About"
 import Vans from "./pages/Vans/Vans"
 import VanDetail from "./pages/Vans/VanDetail"
 import ScrollToTop from "./utils/ScrollToTop"
+import Contact from "./pages/Contact"
 
 function App() {
 	return (
@@ -24,6 +25,10 @@ function App() {
 						<Route
 							path="about"
 							element={<About />}
+						/>
+						<Route
+							path="contact-us"
+							element={<Contact />}
 						/>
 						<Route
 							path="vans"

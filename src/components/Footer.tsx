@@ -8,6 +8,8 @@ import {
 	AccordionItem,
 	AccordionTrigger
 } from "@/components/ui/accordion"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
 import visa from "@/assets/visa.png"
 import mastercard from "@/assets/mastercard.png"
@@ -123,17 +125,19 @@ export default function Footer() {
 								Email
 							</label>
 							<div className="flex flex-col md:flex-row items-center gap-4">
-								<input
+								<Input
 									type="email"
 									id="email"
 									placeholder="E-mail"
-									className="bg-transparent p-3 outline-none border border-gray-400 w-full rounded-md hover:border-secondaryAccent duration-150"
 									aria-required
 									required
 								/>
-								<button className="w-full md:w-[250px] border border-accent p-3 text-accent uppercase font-bold tracking-widest rounded-md">
+								<Button
+									variant={"outline"}
+									className="w-full md:w-[250px] text-accent uppercase font-bold tracking-widest"
+								>
 									Subscribe
-								</button>
+								</Button>
 							</div>
 						</form>
 					</div>
