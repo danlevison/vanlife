@@ -4,12 +4,13 @@ import { fetchVansData } from "../../api"
 import VanCard from "@/components/vans/VanCard"
 import Filters from "@/components/vans/Filters"
 import { VanType } from "@/types/vanType"
+import Loading from "@/components/Loading"
 
 export default function Vans() {
 	const { vans, setVans } = useContext(VansDataContext)
 	const [filteredVans, setFilteredVans] = useState<VanType[] | null>([])
-	const [loading, setLoading] = useState(false)
-	const [imageLoading, setImageLoading] = useState(false)
+	const [loading, setLoading] = useState(true)
+	const [imageLoading, setImageLoading] = useState(true)
 	const [error, setError] = useState<string | null>(null)
 
 	const vanTypeColour = {
@@ -19,8 +20,6 @@ export default function Vans() {
 	} as Record<string, string>
 
 	const loadVansData = useCallback(async () => {
-		setLoading(true)
-		setImageLoading(true)
 		setError(null)
 
 		try {
@@ -79,18 +78,19 @@ export default function Vans() {
 				vanTypeColour={vanTypeColour}
 				setFilteredVans={setFilteredVans}
 			/>
-
-			<div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] justify-center items-center gap-10 w-full">
-				{filteredVans?.map((van) => (
-					<VanCard
-						key={van.id}
-						van={van}
-						vanTypeColour={vanTypeColour}
-						loading={loading}
-						imageLoading={imageLoading}
-					/>
-				))}
-			</div>
+			{loading || imageLoading ? (
+				<Loading />
+			) : (
+				<div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] justify-center items-center gap-10 w-full">
+					{filteredVans?.map((van) => (
+						<VanCard
+							key={van.id}
+							van={van}
+							vanTypeColour={vanTypeColour}
+						/>
+					))}
+				</div>
+			)}
 		</div>
 	)
 }

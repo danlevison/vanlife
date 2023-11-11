@@ -4,26 +4,16 @@ import { Badge } from "@/components/ui/badge"
 import { AiFillStar } from "react-icons/ai"
 // types
 import { VanType } from "@/types/vanType"
-import SkeletonCard from "../ui/SkeletonCard"
 
 type VanCardProps = {
 	van: VanType
 	vanTypeColour: Record<string, string>
-	loading: boolean
-	imageLoading: boolean
 }
 
-export default function VanCard({
-	van,
-	vanTypeColour,
-	loading,
-	imageLoading
-}: VanCardProps) {
+export default function VanCard({ van, vanTypeColour }: VanCardProps) {
 	const [searchParams] = useSearchParams()
 
-	return loading || imageLoading ? (
-		<SkeletonCard />
-	) : (
+	return (
 		<Link
 			to={van.vanId}
 			state={{ search: `?${searchParams.toString()}` }}
