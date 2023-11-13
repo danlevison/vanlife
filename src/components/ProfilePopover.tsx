@@ -26,7 +26,7 @@ export default function ProfilePopover() {
 				<ul className="border-y border-gray-[#BFBFBF] py-4">
 					<li className="py-2">
 						<Link
-							to=""
+							to="/"
 							className="hover:text-accent duration-150"
 						>
 							My profile
@@ -34,7 +34,7 @@ export default function ProfilePopover() {
 					</li>
 					<li className="py-2">
 						<Link
-							to=""
+							to="/"
 							className="hover:text-accent duration-150"
 						>
 							Account details
