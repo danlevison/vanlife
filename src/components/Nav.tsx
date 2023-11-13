@@ -6,9 +6,11 @@ import AuthPopover from "./auth/AuthPopover"
 import ProfilePopover from "./ProfilePopover"
 import useAuth from "@/hooks/useAuth"
 import MobileNavProfile from "./MobileNavProfile"
+import AuthModal from "./auth/AuthModal"
 
 export default function Nav() {
 	const [nav, setNav] = useState(false)
+	const [showSignIn, setShowSignIn] = useState(true)
 	const { user } = useAuth()
 	const activeStyles =
 		"border-b-2 border-black font-semibold py-1 hover:text-secondaryAccent hover:border-b-2 hover:border-secondaryAccent"
@@ -72,7 +74,16 @@ export default function Nav() {
 							Host
 						</NavLink>
 					</li>
-					<li>{user ? <ProfilePopover /> : <AuthPopover />}</li>
+					<li>
+						{user ? (
+							<ProfilePopover />
+						) : (
+							<AuthPopover
+								showSignIn={showSignIn}
+								setShowSignIn={setShowSignIn}
+							/>
+						)}
+					</li>
 				</ul>
 				<button
 					onClick={handleNav}
@@ -87,10 +98,21 @@ export default function Nav() {
 			<div className={nav ? "md:hidden" : ""}>
 				<div
 					className={`fixed top-20 h-screen p-10 ${
-						nav ? "right-0 w-[300px] bg-[#fff7ed]" : "right-[-100%]"
+						nav
+							? "right-0 w-[300px] duration-300 bg-[#fff7ed]"
+							: "right-[-100%] duration-500"
 					}`}
 				>
-					<div>{user ? <MobileNavProfile /> : <AuthPopover />}</div>
+					<div>
+						{user ? (
+							<MobileNavProfile />
+						) : (
+							<AuthModal
+								showSignIn={showSignIn}
+								setShowSignIn={setShowSignIn}
+							/>
+						)}
+					</div>
 					<div className="py-6">
 						<h3 className="border-b border-gray-300 text-lg">
 							Main navigation

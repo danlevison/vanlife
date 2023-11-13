@@ -1,4 +1,3 @@
-import { useState } from "react"
 import {
 	Popover,
 	PopoverContent,
@@ -7,9 +6,15 @@ import {
 import SignIn from "./signIn/SignIn"
 import SignUp from "./signUp/SignUp"
 
-export default function AuthPopover() {
-	const [showSignIn, setShowSignIn] = useState(true)
+type AuthPopoverType = {
+	showSignIn: boolean
+	setShowSignIn: React.Dispatch<React.SetStateAction<boolean>>
+}
 
+export default function AuthPopover({
+	showSignIn,
+	setShowSignIn
+}: AuthPopoverType) {
 	return (
 		<Popover>
 			<PopoverTrigger
@@ -18,7 +23,7 @@ export default function AuthPopover() {
 			>
 				Sign in
 			</PopoverTrigger>
-			<PopoverContent>
+			<PopoverContent align="end">
 				{showSignIn ? (
 					<SignIn setShowSignIn={setShowSignIn} />
 				) : (
