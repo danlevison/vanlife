@@ -1,17 +1,26 @@
 import { useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { BiMenu } from "react-icons/bi"
-import { AiOutlineClose } from "react-icons/ai"
+import { GoPencil } from "react-icons/go"
+import { AiOutlineClose, AiOutlineUser } from "react-icons/ai"
+import { VscAccount } from "react-icons/vsc"
+import { CiLogin, CiLogout } from "react-icons/ci"
 import AuthPopover from "./auth/AuthPopover"
+import ProfilePopover from "./ProfilePopover"
+import useAuth from "@/hooks/useAuth"
+import { Button } from "./ui/button"
 
 export default function Nav() {
 	const [nav, setNav] = useState(false)
+	const { user, signOut } = useAuth()
 	const activeStyles =
 		"border-b-2 border-black font-semibold py-1 hover:text-secondaryAccent hover:border-b-2 hover:border-secondaryAccent"
 
 	const handleNav = () => {
 		setNav(!nav)
 	}
+
+	console.log(user)
 
 	// useEffect(() => {
 	// 	document.body.style.overflow = nav ? "hidden" : "unset"
@@ -69,9 +78,7 @@ export default function Nav() {
 								Host
 							</NavLink>
 						</li>
-						<li>
-							<AuthPopover />
-						</li>
+						<li>{user ? <ProfilePopover /> : <AuthPopover />}</li>
 					</ul>
 					<button
 						onClick={handleNav}
@@ -89,37 +96,87 @@ export default function Nav() {
 							nav ? "right-0 w-[300px] bg-[#fff7ed]" : "right-[-100%]"
 						}`}
 					>
-						<ul className="flex flex-col gap-16 text-lg text-primaryText">
-							<li>
-								<NavLink
-									to="vans"
-									onClick={handleNav}
-									className={({ isActive }) =>
-										isActive
-											? activeStyles
-											: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
-									}
-								>
-									Our Vans
-								</NavLink>
-							</li>
-							<li>
-								<NavLink
-									to="host"
-									onClick={handleNav}
-									className={({ isActive }) =>
-										isActive
-											? activeStyles
-											: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
-									}
-								>
-									Host
-								</NavLink>
-							</li>
-							<li>
+						<div>
+							{user ? (
+								<>
+									<div className="flex flex-col gap-4">
+										<div className="flex items-center gap-6">
+											<VscAccount size={30} />
+											<div>
+												<h3 className="text-lg">
+													{user.user_metadata.first_name}
+												</h3>
+												<p className="text-sm">{user.email}</p>
+											</div>
+										</div>
+
+										<ul className="text-base">
+											<li className="py-2">
+												<Link
+													to=""
+													className="flex items-center gap-6 hover:text-accent duration-150"
+												>
+													<AiOutlineUser size={25} />
+													<p>My profile</p>
+												</Link>
+											</li>
+											<li className="py-4">
+												<Link
+													to=""
+													className="flex items-center gap-6 hover:text-accent duration-150"
+												>
+													<GoPencil size={25} />
+													<p>Account details</p>
+												</Link>
+											</li>
+										</ul>
+										<Button
+											onClick={signOut}
+											variant={"link"}
+											className="flex items-center gap-6 mr-auto p-0 text-base"
+										>
+											<CiLogout size={25} />
+											<p>Log out</p>
+										</Button>
+									</div>
+								</>
+							) : (
 								<AuthPopover />
-							</li>
-						</ul>
+							)}
+						</div>
+						<div className="py-6">
+							<h3 className="border-b border-gray-300 text-lg">
+								Main navigation
+							</h3>
+							<ul className="flex flex-col gap-4 mt-4">
+								<li>
+									<NavLink
+										to="vans"
+										onClick={handleNav}
+										className={({ isActive }) =>
+											isActive
+												? activeStyles
+												: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
+										}
+									>
+										Our Vans
+									</NavLink>
+								</li>
+								<li>
+									<NavLink
+										to="host"
+										onClick={handleNav}
+										className={({ isActive }) =>
+											isActive
+												? activeStyles
+												: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
+										}
+									>
+										Host
+									</NavLink>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</nav>

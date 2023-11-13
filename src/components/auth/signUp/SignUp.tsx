@@ -8,8 +8,22 @@ type SignUpProps = {
 
 export default function SignUp({ setShowSignIn }: SignUpProps) {
 	const [showSignUpForm, setShowSignUpForm] = useState(false)
+	const [signedUp, setSignedUp] = useState(false)
 
-	return (
+	return signedUp ? (
+		<div className="flex flex-col justify-center">
+			<h2 className="text-center text-2xl">You have signed up successfully!</h2>
+			<p className="text-center mt-2">
+				Please check your email to verify your account.
+			</p>
+			<Button
+				onClick={() => setShowSignIn(true)}
+				variant={"link"}
+			>
+				Click here to sign in
+			</Button>
+		</div>
+	) : (
 		<>
 			<h2 className="text-center text-2xl">Sign up</h2>
 			<Button
@@ -18,7 +32,7 @@ export default function SignUp({ setShowSignIn }: SignUpProps) {
 			>
 				Continue with email
 			</Button>
-			{showSignUpForm && <SignUpForm />}
+			{showSignUpForm && <SignUpForm setSignedUp={setSignedUp} />}
 			<div className="flex justify-center items-center">
 				<p className="text-sm">Already have an account?</p>
 				<Button

@@ -4,7 +4,11 @@ import { Input } from "../../ui/input"
 import { Button } from "../../ui/button"
 import { signUpNewUser } from "@/api"
 
-export default function SignUpForm() {
+type SignUpFormType = {
+	setSignedUp: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function SignUpForm({ setSignedUp }: SignUpFormType) {
 	const [formData, setFormData] = useState({
 		name: "",
 		signUpEmail: "",
@@ -33,17 +37,20 @@ export default function SignUpForm() {
 		try {
 			setError("")
 			setLoading(true)
-			signUpNewUser(
+			const data = signUpNewUser(
 				formData.name,
 				formData.signUpEmail,
 				formData.signUpPassword
 			)
+			console.log(data)
+			setSignedUp(true)
 		} catch (error) {
 			console.error(error)
 		} finally {
 			setLoading(false)
 		}
 	}
+
 	return (
 		<form
 			onSubmit={handleSubmit}
@@ -95,7 +102,7 @@ export default function SignUpForm() {
 				}
 				className="w-full"
 			>
-				Sign up
+				{loading ? "Signing up..." : "Sign up"}
 			</Button>
 		</form>
 	)
