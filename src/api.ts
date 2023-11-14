@@ -21,7 +21,10 @@ export async function signUpNewUser(
 		options: {
 			emailRedirectTo: "https://yourvanlife.netlify.app/",
 			data: {
-				first_name: name
+				first_name: name,
+				country: "",
+				date_of_birth: "",
+				phone_number: ""
 			}
 		}
 	})

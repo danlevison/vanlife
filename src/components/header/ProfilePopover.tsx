@@ -18,7 +18,7 @@ export default function ProfilePopover() {
 			<PopoverTrigger>
 				<VscAccount size={25} />
 			</PopoverTrigger>
-			<PopoverContent>
+			<PopoverContent align="end">
 				<div className="text-center pb-4">
 					<h2 className="text-2xl">{usersName}</h2>
 					<p className="text-[#BFBFBF]">{usersEmail}</p>
@@ -26,7 +26,7 @@ export default function ProfilePopover() {
 				<ul className="border-y border-gray-[#BFBFBF] py-4">
 					<li className="py-2">
 						<Link
-							to="/"
+							to="user"
 							className="hover:text-accent duration-150"
 						>
 							My profile
@@ -34,7 +34,7 @@ export default function ProfilePopover() {
 					</li>
 					<li className="py-2">
 						<Link
-							to="/"
+							to="user/details"
 							className="hover:text-accent duration-150"
 						>
 							Account details
