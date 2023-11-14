@@ -1,12 +1,11 @@
 import { useState } from "react"
-import { Link, NavLink } from "react-router-dom"
-import { BiMenu } from "react-icons/bi"
-import { AiOutlineClose } from "react-icons/ai"
-import AuthPopover from "./auth/AuthPopover"
+import { NavLink } from "react-router-dom"
+import AuthPopover from "../auth/AuthPopover"
 import ProfilePopover from "./ProfilePopover"
 import useAuth from "@/hooks/useAuth"
-import MobileNavProfile from "./MobileNavProfile"
-import AuthModal from "./auth/AuthModal"
+import Logo from "./Logo"
+import MobileNavMenu from "./MobileNavMenu"
+import MobileMenuOpenBtn from "./MobileMenuOpenBtn"
 
 export default function Nav() {
 	const [nav, setNav] = useState(false)
@@ -42,13 +41,7 @@ export default function Nav() {
 	return (
 		<nav className="fixed w-full bg-[#fff7ed] h-20 px-10 z-50">
 			<div className="flex justify-between items-center h-full w-full">
-				<Link
-					onClick={() => setNav(false)}
-					to="/"
-					className="text-primaryText text-2xl font-bold uppercase"
-				>
-					#VanLife
-				</Link>
+				<Logo setNav={setNav} />
 				<ul className="hidden md:flex gap-10 text-primaryText">
 					<li>
 						<NavLink
@@ -85,69 +78,16 @@ export default function Nav() {
 						)}
 					</li>
 				</ul>
-				<button
-					onClick={handleNav}
-					aria-label="Open menu"
-					className="md:hidden"
-				>
-					{nav ? <AiOutlineClose size={30} /> : <BiMenu size={30} />}
-				</button>
+				<MobileMenuOpenBtn handleNav={handleNav} />
 			</div>
 
-			{/* Mobile nav */}
-			<div className={nav ? "md:hidden" : ""}>
-				<div
-					className={`fixed top-20 h-screen p-10 ${
-						nav
-							? "right-0 w-[300px] duration-300 bg-[#fff7ed]"
-							: "right-[-100%] duration-500"
-					}`}
-				>
-					<div>
-						{user ? (
-							<MobileNavProfile />
-						) : (
-							<AuthModal
-								showSignIn={showSignIn}
-								setShowSignIn={setShowSignIn}
-							/>
-						)}
-					</div>
-					<div className="py-6">
-						<h3 className="border-b border-gray-300 text-lg">
-							Main navigation
-						</h3>
-						<ul className="flex flex-col gap-4 mt-4">
-							<li>
-								<NavLink
-									to="vans"
-									onClick={handleNav}
-									className={({ isActive }) =>
-										isActive
-											? activeStyles
-											: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
-									}
-								>
-									Our Vans
-								</NavLink>
-							</li>
-							<li>
-								<NavLink
-									to="host"
-									onClick={handleNav}
-									className={({ isActive }) =>
-										isActive
-											? activeStyles
-											: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
-									}
-								>
-									Host
-								</NavLink>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
+			<MobileNavMenu
+				handleNav={handleNav}
+				nav={nav}
+				showSignIn={showSignIn}
+				setShowSignIn={setShowSignIn}
+				activeStyles={activeStyles}
+			/>
 		</nav>
 	)
 }

@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/popover"
 import { VscAccount } from "react-icons/vsc"
 import useAuth from "@/hooks/useAuth"
-import { Button } from "./ui/button"
+import { Button } from "../ui/button"
 
 export default function ProfilePopover() {
 	const { user, signOut } = useAuth()
