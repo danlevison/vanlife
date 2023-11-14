@@ -3,6 +3,7 @@ import { Label } from "../../ui/label"
 import { Input } from "../../ui/input"
 import { Button } from "../../ui/button"
 import { signUpNewUser } from "@/api"
+import Spinner from "@/components/Spinner"
 
 type SignUpFormType = {
 	setSignedUp: React.Dispatch<React.SetStateAction<boolean>>
@@ -102,7 +103,16 @@ export default function SignUpForm({ setSignedUp }: SignUpFormType) {
 				}
 				className="w-full"
 			>
-				{loading ? "Signing up..." : "Sign up"}
+				{loading ? (
+					<>
+						Signing up{" "}
+						<span className="ml-2">
+							<Spinner />
+						</span>
+					</>
+				) : (
+					"Sign up"
+				)}
 			</Button>
 		</form>
 	)

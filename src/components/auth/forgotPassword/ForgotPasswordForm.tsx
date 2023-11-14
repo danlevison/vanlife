@@ -2,11 +2,14 @@ import { useState } from "react"
 import { Label } from "../../ui/label"
 import { Input } from "../../ui/input"
 import { Button } from "../../ui/button"
+import { MdOutlineMarkEmailRead } from "react-icons/md"
 import { sendResetPasswordEmail } from "@/api"
+import Spinner from "@/components/Spinner"
 
 export default function ForgotPasswordForm() {
 	const [resetEmail, setResetEmail] = useState("")
 	const [error, setError] = useState<string | null>(null)
+	const [message, setMessage] = useState("")
 	const [loading, setLoading] = useState(false)
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -20,8 +23,10 @@ export default function ForgotPasswordForm() {
 
 		try {
 			setError("")
+			setMessage("")
 			setLoading(true)
 			await sendResetPasswordEmail(resetEmail)
+			setMessage("Email sent!")
 		} catch (error) {
 			console.error(error)
 		} finally {
@@ -29,7 +34,15 @@ export default function ForgotPasswordForm() {
 		}
 	}
 
-	return (
+	return message ? (
+		<div className="flex flex-col items-center p-3 rounded-md mt-2">
+			<MdOutlineMarkEmailRead
+				size={50}
+				className="text-secondaryAccent"
+			/>
+			<p className="text-center text-sm">{message}</p>
+		</div>
+	) : (
 		<form
 			onSubmit={handleSubmit}
 			noValidate
@@ -55,7 +68,16 @@ export default function ForgotPasswordForm() {
 				disabled={loading || !resetEmail}
 				className="w-full"
 			>
-				Reset my password
+				{loading ? (
+					<>
+						Reset my password{" "}
+						<span className="ml-2">
+							<Spinner />
+						</span>
+					</>
+				) : (
+					"Reset my password"
+				)}
 			</Button>
 		</form>
 	)

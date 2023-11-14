@@ -3,6 +3,7 @@ import { Label } from "../../ui/label"
 import { Input } from "../../ui/input"
 import { Button } from "../../ui/button"
 import { signInUser } from "@/api"
+import Spinner from "@/components/Spinner"
 
 export default function SignInForm() {
 	const [formData, setFormData] = useState({
@@ -77,7 +78,16 @@ export default function SignInForm() {
 				disabled={loading || !(formData.signInEmail && formData.signInPassword)}
 				className="w-full"
 			>
-				Sign in
+				{loading ? (
+					<>
+						Signing in{" "}
+						<span className="ml-2">
+							<Spinner />
+						</span>
+					</>
+				) : (
+					"Sign in"
+				)}
 			</Button>
 		</form>
 	)

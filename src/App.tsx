@@ -46,11 +46,11 @@ function App() {
 								path="vans/:id"
 								element={<VanDetail />}
 							/>
+							<Route
+								path="update-password"
+								element={<UpdatePassword />}
+							/>
 						</Route>
-						<Route
-							path="update-password"
-							element={<UpdatePassword />}
-						/>
 
 						<Route element={<AuthRequired />}>
 							<Route
