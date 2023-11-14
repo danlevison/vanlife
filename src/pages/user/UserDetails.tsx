@@ -5,7 +5,7 @@ export default function UserDetails() {
 	const { user } = useAuth()
 
 	return (
-		<div className="flex flex-grow flex-col w-full min-h-screen">
+		<div className="flex flex-grow flex-col w-full">
 			<h2 className="text-2xl">Account details</h2>
 			<ul className="flex flex-col">
 				<UserDetailItem

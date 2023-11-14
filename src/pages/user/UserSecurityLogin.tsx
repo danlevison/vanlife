@@ -24,7 +24,7 @@ export default function UserSecurityLogin() {
 	}
 
 	return (
-		<div className="flex flex-grow flex-col w-full min-h-screen">
+		<div className="flex flex-grow flex-col w-full">
 			<h2 className="text-2xl">Reset password</h2>
 			<form
 				onSubmit={handleSubmit}
