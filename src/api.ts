@@ -38,3 +38,15 @@ export async function signInUser(email: string, password: string) {
 	})
 	return data
 }
+
+export async function sendResetPasswordEmail(email: string) {
+	const { data } = await supabase.auth.resetPasswordForEmail(email)
+	return data
+}
+
+export async function updatePassword(newPassword: string) {
+	const { data } = await supabase.auth.updateUser({
+		password: newPassword
+	})
+	return data
+}

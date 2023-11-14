@@ -3,10 +3,10 @@ import { Button } from "../../ui/button"
 import SignUpForm from "./SignUpForm"
 
 type SignUpProps = {
-	setShowSignIn: React.Dispatch<React.SetStateAction<boolean>>
+	switchToSignIn: () => void
 }
 
-export default function SignUp({ setShowSignIn }: SignUpProps) {
+export default function SignUp({ switchToSignIn }: SignUpProps) {
 	const [showSignUpForm, setShowSignUpForm] = useState(false)
 	const [signedUp, setSignedUp] = useState(false)
 
@@ -17,7 +17,7 @@ export default function SignUp({ setShowSignIn }: SignUpProps) {
 				Please check your email to verify your account.
 			</p>
 			<Button
-				onClick={() => setShowSignIn(true)}
+				onClick={switchToSignIn}
 				variant={"link"}
 			>
 				Click here to sign in
@@ -36,7 +36,7 @@ export default function SignUp({ setShowSignIn }: SignUpProps) {
 			<div className="flex justify-center items-center">
 				<p className="text-sm">Already have an account?</p>
 				<Button
-					onClick={() => setShowSignIn(true)}
+					onClick={switchToSignIn}
 					variant={"link"}
 				>
 					Sign in

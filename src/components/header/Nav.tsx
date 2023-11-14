@@ -9,7 +9,6 @@ import MobileMenuOpenBtn from "./MobileMenuOpenBtn"
 
 export default function Nav() {
 	const [nav, setNav] = useState(false)
-	const [showSignIn, setShowSignIn] = useState(true)
 	const { user } = useAuth()
 	const activeStyles =
 		"border-b-2 border-black font-semibold py-1 hover:text-secondaryAccent hover:border-b-2 hover:border-secondaryAccent"
@@ -67,16 +66,7 @@ export default function Nav() {
 							Host
 						</NavLink>
 					</li>
-					<li>
-						{user ? (
-							<ProfilePopover />
-						) : (
-							<AuthPopover
-								showSignIn={showSignIn}
-								setShowSignIn={setShowSignIn}
-							/>
-						)}
-					</li>
+					<li>{user ? <ProfilePopover /> : <AuthPopover />}</li>
 				</ul>
 				<MobileMenuOpenBtn handleNav={handleNav} />
 			</div>
@@ -84,8 +74,6 @@ export default function Nav() {
 			<MobileNavMenu
 				handleNav={handleNav}
 				nav={nav}
-				showSignIn={showSignIn}
-				setShowSignIn={setShowSignIn}
 				activeStyles={activeStyles}
 			/>
 		</nav>

@@ -1,30 +1,33 @@
+import { useState } from "react"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import SignIn from "./signIn/SignIn"
 import SignUp from "./signUp/SignUp"
 import { AiOutlineUser } from "react-icons/ai"
 import { CiLogin } from "react-icons/ci"
+import ForgotPassword from "./forgotPassword/ForgotPassword"
 
-type AuthModalType = {
-	showSignIn: boolean
-	setShowSignIn: React.Dispatch<React.SetStateAction<boolean>>
-}
+type AuthComponentType = "SignIn" | "SignUp" | "ForgotPassword"
 
-export default function AuthModal({
-	showSignIn,
-	setShowSignIn
-}: AuthModalType) {
+export default function AuthModal() {
+	const [activeComponent, setActiveComponent] =
+		useState<AuthComponentType>("SignIn")
+
+	const switchToSignIn = () => setActiveComponent("SignIn")
+	const switchToSignUp = () => setActiveComponent("SignUp")
+	const switchToForgotPassword = () => setActiveComponent("ForgotPassword")
+
 	return (
 		<Dialog>
 			<div className="flex flex-col items-start gap-4">
 				<DialogTrigger
-					onClick={() => setShowSignIn(true)}
+					onClick={switchToSignIn}
 					className="flex items-center gap-4 hover:text-accent"
 				>
 					<CiLogin size={25} />
 					<p>Sign in</p>
 				</DialogTrigger>
 				<DialogTrigger
-					onClick={() => setShowSignIn(false)}
+					onClick={switchToSignUp}
 					className="flex items-center gap-4 hover:text-accent"
 				>
 					<AiOutlineUser size={25} />
@@ -33,10 +36,17 @@ export default function AuthModal({
 			</div>
 
 			<DialogContent className="block max-w-full h-full bg-white">
-				{showSignIn ? (
-					<SignIn setShowSignIn={setShowSignIn} />
-				) : (
-					<SignUp setShowSignIn={setShowSignIn} />
+				{activeComponent === "SignIn" && (
+					<SignIn
+						switchToSignUp={switchToSignUp}
+						switchToForgotPassword={switchToForgotPassword}
+					/>
+				)}
+				{activeComponent === "SignUp" && (
+					<SignUp switchToSignIn={switchToSignIn} />
+				)}
+				{activeComponent === "ForgotPassword" && (
+					<ForgotPassword switchToSignIn={switchToSignIn} />
 				)}
 			</DialogContent>
 		</Dialog>

@@ -13,6 +13,7 @@ import UserDashboard from "./pages/user/UserDashboard"
 import UserDetails from "./pages/user/UserDetails"
 import DetailsLayout from "./components/layouts/DetailsLayout"
 import UserSecurityLogin from "./pages/user/UserSecurityLogin"
+import UpdatePassword from "./pages/UpdatePassword"
 
 function App() {
 	return (
@@ -46,6 +47,10 @@ function App() {
 								element={<VanDetail />}
 							/>
 						</Route>
+						<Route
+							path="update-password"
+							element={<UpdatePassword />}
+						/>
 
 						<Route element={<AuthRequired />}>
 							<Route

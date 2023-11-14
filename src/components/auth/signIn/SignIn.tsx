@@ -3,10 +3,14 @@ import { Button } from "../../ui/button"
 import SignInForm from "./SignInForm"
 
 type SignInProps = {
-	setShowSignIn: React.Dispatch<React.SetStateAction<boolean>>
+	switchToSignUp: () => void
+	switchToForgotPassword: () => void
 }
 
-export default function SignIn({ setShowSignIn }: SignInProps) {
+export default function SignIn({
+	switchToSignUp,
+	switchToForgotPassword
+}: SignInProps) {
 	const [showSignInForm, setShowSignInForm] = useState(false)
 	return (
 		<>
@@ -23,6 +27,7 @@ export default function SignIn({ setShowSignIn }: SignInProps) {
 					<Button
 						variant={"link"}
 						className="mx-auto w-full"
+						onClick={switchToForgotPassword}
 					>
 						Forgot password?
 					</Button>
@@ -32,7 +37,7 @@ export default function SignIn({ setShowSignIn }: SignInProps) {
 				<p className="text-sm">Don't have an account?</p>
 				<Button
 					variant={"link"}
-					onClick={() => setShowSignIn(false)}
+					onClick={switchToSignUp}
 				>
 					Sign up
 				</Button>

@@ -7,16 +7,12 @@ import MobileMenuCloseBtn from "./MobileMenuCloseBtn"
 type MobileNavMenuProps = {
 	handleNav: () => void
 	nav: boolean
-	showSignIn: boolean
-	setShowSignIn: React.Dispatch<React.SetStateAction<boolean>>
 	activeStyles: string
 }
 
 export default function MobileNavMenu({
 	handleNav,
 	nav,
-	showSignIn,
-	setShowSignIn,
 	activeStyles
 }: MobileNavMenuProps) {
 	const { user } = useAuth()
@@ -35,12 +31,9 @@ export default function MobileNavMenu({
 				</div>
 				<div>
 					{user ? (
-						<MobileNavUserProfile />
+						<MobileNavUserProfile handleNav={handleNav} />
 					) : (
-						<AuthModal
-							showSignIn={showSignIn}
-							setShowSignIn={setShowSignIn}
-						/>
+						<AuthModal />
 					)}
 				</div>
 

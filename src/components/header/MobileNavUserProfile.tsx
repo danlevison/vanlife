@@ -6,7 +6,13 @@ import { GoPencil } from "react-icons/go"
 import { AiOutlineUser } from "react-icons/ai"
 import useAuth from "@/hooks/useAuth"
 
-export default function MobileNavUserProfile() {
+type MobileNavUserProfileProps = {
+	handleNav: () => void
+}
+
+export default function MobileNavUserProfile({
+	handleNav
+}: MobileNavUserProfileProps) {
 	const { user, signOut } = useAuth()
 	return (
 		<div className="flex flex-col gap-4">
@@ -21,7 +27,8 @@ export default function MobileNavUserProfile() {
 			<ul className="text-base">
 				<li className="py-2">
 					<Link
-						to="/"
+						to="user"
+						onClick={handleNav}
 						className="flex items-center gap-4 hover:text-accent duration-150"
 					>
 						<AiOutlineUser size={25} />
@@ -30,7 +37,8 @@ export default function MobileNavUserProfile() {
 				</li>
 				<li className="py-4">
 					<Link
-						to="/"
+						to="user/details"
+						onClick={handleNav}
 						className="flex items-center gap-4 hover:text-accent duration-150"
 					>
 						<GoPencil size={25} />
