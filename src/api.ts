@@ -40,7 +40,9 @@ export async function signInUser(email: string, password: string) {
 }
 
 export async function sendResetPasswordEmail(email: string) {
-	const { data } = await supabase.auth.resetPasswordForEmail(email)
+	const { data } = await supabase.auth.resetPasswordForEmail(email, {
+		redirectTo: "https://yourvanlife.netlify.app/update-password"
+	})
 	return data
 }
 
