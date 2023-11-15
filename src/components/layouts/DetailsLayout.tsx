@@ -6,7 +6,7 @@ export default function DetailsLayout() {
 
 	return (
 		<div className="flex flex-col sm:flex-row justify-between px-10 py-24 max-w-[1440px] mx-auto">
-			<nav className="flex flex-row sm:flex-col border-b sm:border-b-0 sm:border-r w-full sm:w-[300px] mb-5 sm:mb-0 sm:mr-7y">
+			<nav className="flex flex-row sm:flex-col border-b sm:border-b-0 sm:border-r w-full sm:w-[300px] mb-5 sm:mb-0 sm:mr-7">
 				<NavLink
 					to="user/details"
 					end

@@ -15,7 +15,12 @@ export default function SignUpForm({ setSignedUp }: SignUpFormType) {
 		signUpEmail: "",
 		signUpPassword: ""
 	})
-	const [error, setError] = useState<string | null>(null)
+	const [errors, setErrors] = useState({
+		name: "",
+		signUpEmail: "",
+		signUpPassword: "",
+		general: ""
+	})
 	const [loading, setLoading] = useState(false)
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,6 +28,14 @@ export default function SignUpForm({ setSignedUp }: SignUpFormType) {
 			return {
 				...prevFormData,
 				[e.target.name]: e.target.value
+			}
+		})
+
+		setErrors((prevErrors) => {
+			return {
+				...prevErrors,
+				[e.target.name]: "",
+				general: ""
 			}
 		})
 	}
@@ -33,20 +46,59 @@ export default function SignUpForm({ setSignedUp }: SignUpFormType) {
 		// Validation
 		const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 		if (!emailRegex.test(formData.signUpEmail)) {
-			return setError("Please enter a valid email address")
+			return setErrors({
+				name: "",
+				signUpEmail: "Please enter a valid email address",
+				signUpPassword: "",
+				general: ""
+			})
 		}
+
+		if (formData.signUpPassword.length < 6) {
+			return setErrors({
+				name: "",
+				signUpEmail: "",
+				signUpPassword: "Your password should be at least 6 characters",
+				general: ""
+			})
+		}
+
 		try {
-			setError("")
+			setErrors({
+				name: "",
+				signUpEmail: "",
+				signUpPassword: "",
+				general: ""
+			})
 			setLoading(true)
-			const data = signUpNewUser(
+			const data = await signUpNewUser(
 				formData.name,
 				formData.signUpEmail,
 				formData.signUpPassword
 			)
-			console.log(data)
-			setSignedUp(true)
+
+			if (data && data.user) {
+				if (data.user.identities && data.user.identities?.length > 0) {
+					// if the account is not already registered
+					setSignedUp(true)
+				} else {
+					return setErrors({
+						name: "",
+						signUpEmail:
+							"The email address you're trying to use is already linked to an account. Please try a different email address.",
+						signUpPassword: "",
+						general: ""
+					})
+				}
+			}
 		} catch (error) {
 			console.error(error)
+			setErrors({
+				name: "",
+				signUpEmail: "",
+				signUpPassword: "",
+				general: "An error occurred while signing up. Please try again."
+			})
 		} finally {
 			setLoading(false)
 		}
@@ -77,12 +129,11 @@ export default function SignUpForm({ setSignedUp }: SignUpFormType) {
 				name="signUpEmail"
 				required
 				className={`bg-transparent mb-2 ${
-					error === "Please enter a valid email address" &&
-					"border-red-500 mb-0"
+					errors.signUpEmail && "border-red-500 mb-0"
 				}`}
 			/>
-			{error === "Please enter a valid email address" && (
-				<p className="text-sm text-red-500 mb-1">{error}</p>
+			{errors.signUpEmail && (
+				<p className="text-sm text-red-500 mb-1">{errors.signUpEmail}</p>
 			)}
 			<Label htmlFor="email">Password*</Label>
 			<Input
@@ -92,16 +143,25 @@ export default function SignUpForm({ setSignedUp }: SignUpFormType) {
 				id="signUpPassword"
 				name="signUpPassword"
 				required
-				className={`bg-transparent mb-4 ${
-					error === "Invalid password" && "border-red-500"
+				className={`bg-transparent ${
+					errors.signUpPassword && "border-red-500"
 				}`}
 			/>
+			{errors.signUpPassword && (
+				<p className="text-sm text-red-500 mb-1">{errors.signUpPassword}</p>
+			)}
+			{errors.general && (
+				<div className="border-2 border-red-600 mt-4 p-5 rounded-lg">
+					<h2 className="text-lg text-red-600">Sign up unsuccessful</h2>
+					<p className="text-sm mt-2">{errors.general}</p>
+				</div>
+			)}
 			<Button
 				disabled={
 					loading ||
 					!(formData.name && formData.signUpEmail && formData.signUpPassword)
 				}
-				className="w-full"
+				className="w-full mt-4"
 			>
 				{loading ? (
 					<>
