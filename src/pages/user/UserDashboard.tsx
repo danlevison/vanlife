@@ -20,7 +20,10 @@ export default function UserDashboard() {
 				</div>
 
 				<div className="flex flex-col md:flex-row items-center gap-10 pt-10">
-					<Link to={"details"}>
+					<Link
+						to={"details"}
+						className="hover:scale-[1.02] duration-300"
+					>
 						<div className="flex flex-col justify-center p-5 rounded-lg bg-white shadow-lg sm:w-[350px] h-[200px]">
 							<LiaShuttleVanSolid
 								size={50}
@@ -30,7 +33,10 @@ export default function UserDashboard() {
 							<p>Review and update your personal details</p>
 						</div>
 					</Link>
-					<Link to={"details"}>
+					<Link
+						to={"details"}
+						className="hover:scale-[1.02] duration-300"
+					>
 						<div className="flex flex-col justify-center p-5 rounded-lg bg-white shadow-lg sm:w-[350px] h-[200px]">
 							<BsPersonVcard
 								size={50}

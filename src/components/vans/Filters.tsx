@@ -1,14 +1,9 @@
 import { useContext, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
 import VansDataContext from "../../context/VansDataContext"
-import { PiCaretDownLight } from "react-icons/pi"
-import { RiCloseFill } from "react-icons/ri"
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu"
+import CheckboxFilters from "./CheckboxFilters"
+import SortBy from "./SortBy"
+
 //types
 import { VanType } from "@/types/vanType"
 
@@ -22,15 +17,17 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 	const [searchParams, setSearchParams] = useSearchParams()
 	const vanTypeFilter = searchParams.get("type")
 	const sortByFilter = searchParams.get("sort_by")
-	const paramsKey: string[] = []
-	const paramsValue: string[] = []
+	const paramsKeys: string[] = []
+	const paramsValues: string[] = []
 
 	searchParams.forEach((value, key) => {
-		if (key === "type") {
-			paramsKey.push(key)
-			paramsValue.push(value)
+		if (key !== "sort_by") {
+			paramsKeys.push(key)
+			paramsValues.push(value)
 		}
 	})
+
+	console.log(vanTypeFilter)
 
 	const filterByType = (
 		vans: VanType[],
@@ -77,6 +74,20 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 		})
 	}
 
+	const removeFilterButton = () => {
+		if (paramsKeys.length > 0) {
+			return paramsKeys.map((key) => (
+				<p
+					key={key}
+					className="group px-2 py-1 bg-gray-200 rounded-md text-sm"
+				>
+					{key.toString().charAt(0).toUpperCase() + key.toString().slice(1)}{" "}
+					{/* <RiCloseFill className="inline-block" /> */}
+				</p>
+			))
+		}
+	}
+
 	useEffect(() => {
 		if (vans) {
 			const filteredByType = filterByType(vans, vanTypeFilter)
@@ -118,56 +129,18 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 				>
 					Rugged
 				</button>
-				<DropdownMenu>
-					<DropdownMenuTrigger className="px-3 py-2 rounded-lg font-semibold bg-[#FFEAD0] text-primaryText">
-						Sort by{" "}
-						<PiCaretDownLight
-							size={20}
-							className="inline-block "
-						/>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent>
-						<DropdownMenuItem className="p-0">
-							<button
-								className="w-full text-left px-2 py-1.5"
-								onClick={() => handleFilterChange("sort_by", "rating")}
-							>
-								Rating
-							</button>
-						</DropdownMenuItem>
-						<DropdownMenuItem className="p-0">
-							<button
-								className="w-full text-left px-2 py-1.5"
-								onClick={() => handleFilterChange("sort_by", "HL")}
-							>
-								Price: High - Low
-							</button>
-						</DropdownMenuItem>
-						<DropdownMenuItem className="p-0">
-							<button
-								className="w-full text-left px-2 py-1.5"
-								onClick={() => handleFilterChange("sort_by", "LH")}
-							>
-								Price: Low - High
-							</button>
-						</DropdownMenuItem>
-					</DropdownMenuContent>
-				</DropdownMenu>
+				<SortBy handleFilterChange={handleFilterChange} />
+				<CheckboxFilters
+					handleFilterChange={handleFilterChange}
+					paramKeys={paramsKeys}
+				/>
 			</div>
+
 			<div className="flex items-center gap-3 pb-2 text-primaryText">
 				<p>
-					{paramsKey.length} {paramsKey.length === 1 ? "Filter" : "Filters"}
+					{paramsKeys.length} {paramsKeys.length === 1 ? "Filter" : "Filters"}
 				</p>
-				{paramsKey.length > 0 && (
-					<button
-						onClick={() => handleFilterChange("type", null)}
-						className="group px-2 py-1 bg-gray-200 rounded-md text-sm hover:bg-accent hover:text-white"
-					>
-						{paramsValue.toString().charAt(0).toUpperCase() +
-							paramsValue.toString().slice(1)}{" "}
-						<RiCloseFill className="inline-block" />
-					</button>
-				)}
+				{removeFilterButton()}
 			</div>
 		</div>
 	)
