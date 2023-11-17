@@ -24,7 +24,7 @@ export default function SortBy({ handleFilterChange }: SortByProps) {
 				className="w-40"
 				align="start"
 			>
-				<DropdownMenuItem className="p-0">
+				<DropdownMenuItem className="p-0 text-base">
 					<button
 						className="w-full text-left px-2 py-1.5 hover:text-white"
 						onClick={() => handleFilterChange("sort_by", "rating")}
@@ -32,7 +32,7 @@ export default function SortBy({ handleFilterChange }: SortByProps) {
 						Rating
 					</button>
 				</DropdownMenuItem>
-				<DropdownMenuItem className="p-0">
+				<DropdownMenuItem className="p-0 text-base">
 					<button
 						className="w-full text-left px-2 py-1.5 hover:text-white"
 						onClick={() => handleFilterChange("sort_by", "HL")}
@@ -40,7 +40,7 @@ export default function SortBy({ handleFilterChange }: SortByProps) {
 						Price: High - Low
 					</button>
 				</DropdownMenuItem>
-				<DropdownMenuItem className="p-0">
+				<DropdownMenuItem className="p-0 text-base">
 					<button
 						className="w-full text-left px-2 py-1.5 hover:text-white"
 						onClick={() => handleFilterChange("sort_by", "LH")}

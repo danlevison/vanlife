@@ -19,7 +19,7 @@ export default function CheckboxFilters({
 	paramsKeys
 }: CheckboxFiltersProps) {
 	const checkboxOptions = useMemo(
-		() => ["Automatic", "Manual", "Festival friendly", "Pet friendly"],
+		() => ["automatic", "manual", "festival friendly", "pet friendly"],
 		[]
 	)
 	const initialState = checkboxOptions.map((option) =>
@@ -117,9 +117,26 @@ export default function CheckboxFilters({
 									type="checkbox"
 									id={option}
 									value={option}
-									className="w-5 h-5 accent-accent"
+									className="relative peer shrink-0 appearance-none w-5 h-5 border-2 border-accent rounded-sm bg-white checked:bg-accent checked:border-0"
 								/>
-								<Label htmlFor={option}>{option}</Label>
+								<Label
+									htmlFor={option}
+									className="text-base capitalize"
+								>
+									{option}
+								</Label>
+								<svg
+									className="absolute w-5 h-5 hidden peer-checked:block pointer-events-none"
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="white"
+									stroke-width="3"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<polyline points="20 6 9 17 4 12"></polyline>
+								</svg>
 							</li>
 						))}
 					</ul>
