@@ -25,6 +25,6 @@ export type VanType = {
 	type: string
 	vanId: string
 	vehicle_description: string[]
-	vehicle_details: Json | VehicleDetails
+	vehicle_details: VehicleDetails | Json
 	vehicle_rules: string[]
 }

@@ -52,7 +52,7 @@ export default function VanDetail() {
 					const data = await fetchVanData(id)
 					data?.map((van) => setVan(van))
 				} catch (error) {
-					console.log(error)
+					console.error(error)
 					setError("It looks like something went wrong!")
 				} finally {
 					setLoading(false)

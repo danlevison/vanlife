@@ -11,19 +11,19 @@ import { Label } from "../ui/label"
 
 type CheckboxFiltersProps = {
 	handleFilterChange: (key: string, value: string | null) => void
-	paramKeys: string[]
+	paramsKeys: string[]
 }
 
 export default function CheckboxFilters({
 	handleFilterChange,
-	paramKeys
+	paramsKeys
 }: CheckboxFiltersProps) {
 	const checkboxOptions = useMemo(
-		() => ["simple", "automatic", "manual", "festival", "pet"],
+		() => ["Automatic", "Manual", "Festival friendly", "Pet friendly"],
 		[]
 	)
 	const initialState = checkboxOptions.map((option) =>
-		paramKeys.includes(option)
+		paramsKeys.includes(option)
 	)
 	const [checkedState, setCheckedState] = useState(
 		initialState || new Array(checkboxOptions.length).fill(false)
@@ -33,10 +33,10 @@ export default function CheckboxFilters({
 
 	useEffect(() => {
 		const updatedState = checkboxOptions.map((option) =>
-			paramKeys.includes(option)
+			paramsKeys.includes(option)
 		)
 		setCheckedState(updatedState)
-	}, [paramKeys, checkboxOptions])
+	}, [paramsKeys, checkboxOptions])
 
 	const handleChange = (
 		e: React.ChangeEvent<HTMLInputElement>,
@@ -83,60 +83,76 @@ export default function CheckboxFilters({
 		}
 	}
 
-	const clearFilters = () => {
+	const clearDropdownFilters = () => {
 		setAddedFilters([])
 		setUncheckedFilters([])
 		setCheckedState(new Array(checkboxOptions.length).fill(false))
 	}
 
+	const clearAllFilters = () => {
+		clearDropdownFilters()
+		paramsKeys.forEach((key) => handleFilterChange(key, null))
+	}
+
 	return (
-		<DropdownMenu>
-			<DropdownMenuTrigger className="px-3 py-2 rounded-lg font-semibold bg-[#FFEAD0] text-primaryText">
-				More filters
-			</DropdownMenuTrigger>
+		<>
+			<DropdownMenu>
+				<DropdownMenuTrigger className="px-3 py-2 rounded-lg font-semibold bg-[#FFEAD0] text-primaryText">
+					More filters
+				</DropdownMenuTrigger>
 
-			<DropdownMenuContent
-				className="w-56 p-2"
-				align="start"
-			>
-				<ul className="flex flex-col gap-3 pb-2">
-					{checkboxOptions.map((option, index) => (
-						<li
-							className="flex items-center gap-2"
-							key={option}
-						>
-							<input
-								onChange={(e) => handleChange(e, index)}
-								checked={checkedState[index]}
-								type="checkbox"
-								id={option}
-								value={option}
-								className="w-5 h-5 accent-accent"
-							/>
-							<Label htmlFor={option}>{option}</Label>
-						</li>
-					))}
-				</ul>
-				<DropdownMenuSeparator />
-				<div className="flex justify-between items-center gap-4">
-					<Button
-						onClick={clearFilters}
-						variant={"link"}
-						className="w-fit h-fit"
-					>
-						Clear
-					</Button>
-
-					<DropdownMenuItem className="focus:bg-transparent">
+				<DropdownMenuContent
+					className="w-56 p-2"
+					align="start"
+				>
+					<ul className="flex flex-col gap-3 pb-2">
+						{checkboxOptions.map((option, index) => (
+							<li
+								className="flex items-center gap-2"
+								key={option}
+							>
+								<input
+									onChange={(e) => handleChange(e, index)}
+									checked={checkedState[index]}
+									type="checkbox"
+									id={option}
+									value={option}
+									className="w-5 h-5 accent-accent"
+								/>
+								<Label htmlFor={option}>{option}</Label>
+							</li>
+						))}
+					</ul>
+					<DropdownMenuSeparator />
+					<div className="flex justify-between items-center gap-4">
 						<Button
-							onClick={handleFilterValues}
+							onClick={clearDropdownFilters}
+							variant={"link"}
 							className="w-fit h-fit"
 						>
-							Apply
+							Clear
 						</Button>
-					</DropdownMenuItem>
-				</div>
-			</DropdownMenuContent>
-		</DropdownMenu>
+
+						<DropdownMenuItem className="focus:bg-transparent">
+							<Button
+								onClick={handleFilterValues}
+								className="w-fit h-fit"
+							>
+								Apply
+							</Button>
+						</DropdownMenuItem>
+					</div>
+				</DropdownMenuContent>
+			</DropdownMenu>
+			{paramsKeys.length > 0 && (
+				<Button
+					variant={"link"}
+					onClick={clearAllFilters}
+					className="text-primaryText"
+				>
+					Clear All
+				</Button>
+			)}
+		</>
 	)
 }

@@ -27,8 +27,6 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 		}
 	})
 
-	console.log(vanTypeFilter)
-
 	const filterByType = (
 		vans: VanType[],
 		typeSortParam: string | null
@@ -36,13 +34,57 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 		if (!typeSortParam) {
 			return vans
 		}
+
 		return vans.filter((van) => van.type.toLowerCase() === typeSortParam)
 	}
 
-	const sortByPrice = (
-		vans: VanType[],
-		sortByFilter: string | null
-	): VanType[] => {
+	const filterByParams = (vans: VanType[]): VanType[] => {
+		if (
+			paramsKeys.length === 0 ||
+			(paramsKeys.length === 1 && paramsKeys.includes("type"))
+		) {
+			return vans
+		}
+
+		const transmissionFilter = vans.filter((van) => {
+			return paramsKeys.some((key) => {
+				if (
+					van.vehicle_details &&
+					typeof van.vehicle_details === "object" &&
+					"Transmission" in van.vehicle_details &&
+					typeof van.vehicle_details.Transmission === "string"
+				) {
+					return (
+						van.vehicle_details?.Transmission?.toLowerCase() ===
+						key.toLowerCase()
+					)
+				}
+			})
+		})
+
+		const ruleFilter = vans.filter((van) => {
+			return paramsKeys.some((key) => {
+				return van.vehicle_rules.some((rule) =>
+					rule.toLowerCase().includes(key.toLowerCase())
+				)
+			})
+		})
+
+		// If only transmission filter is applied, return the transmission-filtered vans directly
+		if (ruleFilter.length === 0) {
+			return transmissionFilter
+		}
+
+		// If only rule-based filter is applied, return the rule-filtered vans directly
+		if (transmissionFilter.length === 0) {
+			return ruleFilter
+		}
+
+		// Use set intersection if both filters are applied
+		return transmissionFilter.filter((van) => ruleFilter.includes(van))
+	}
+
+	const sortBy = (vans: VanType[], sortByFilter: string | null): VanType[] => {
 		if (!sortByFilter) {
 			return vans
 		}
@@ -74,7 +116,7 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 		})
 	}
 
-	const removeFilterButton = () => {
+	const activeFilters = () => {
 		if (paramsKeys.length > 0) {
 			return paramsKeys.map((key) => (
 				<p
@@ -82,7 +124,6 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 					className="group px-2 py-1 bg-gray-200 rounded-md text-sm"
 				>
 					{key.toString().charAt(0).toUpperCase() + key.toString().slice(1)}{" "}
-					{/* <RiCloseFill className="inline-block" /> */}
 				</p>
 			))
 		}
@@ -91,10 +132,11 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 	useEffect(() => {
 		if (vans) {
 			const filteredByType = filterByType(vans, vanTypeFilter)
-			const sortedByPrice = sortByPrice(filteredByType, sortByFilter)
-			setFilteredVans(sortedByPrice)
+			const filteredByParams = filterByParams(filteredByType)
+			const sortedBy = sortBy(filteredByParams, sortByFilter)
+			setFilteredVans(sortedBy)
 		}
-	}, [vanTypeFilter, sortByFilter, vans, setFilteredVans])
+	}, [sortByFilter, vans, setFilteredVans, searchParams, vanTypeFilter])
 
 	return (
 		<div className="border-b border-gray-300 mb-4">
@@ -132,7 +174,7 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 				<SortBy handleFilterChange={handleFilterChange} />
 				<CheckboxFilters
 					handleFilterChange={handleFilterChange}
-					paramKeys={paramsKeys}
+					paramsKeys={paramsKeys}
 				/>
 			</div>
 
@@ -140,7 +182,7 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 				<p>
 					{paramsKeys.length} {paramsKeys.length === 1 ? "Filter" : "Filters"}
 				</p>
-				{removeFilterButton()}
+				{activeFilters()}
 			</div>
 		</div>
 	)
