@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import VansDataContext from "../../context/VansDataContext"
 import CheckboxFilters from "./CheckboxFilters"
@@ -8,13 +8,15 @@ import SortBy from "./SortBy"
 import { VanType } from "@/types/vanType"
 
 type FiltersProps = {
-	setFilteredVans: React.Dispatch<React.SetStateAction<VanType[] | null>>
+	setNoVans: React.Dispatch<React.SetStateAction<boolean>>
 	vanTypeColour: Record<string, string>
+	setFilteredVans: React.Dispatch<React.SetStateAction<VanType[] | null>>
 }
 
-function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
+function Filters({ vanTypeColour, setFilteredVans, setNoVans }: FiltersProps) {
 	const { vans } = useContext(VansDataContext)
 	const [searchParams, setSearchParams] = useSearchParams()
+	const [resetCheckboxFilters, setResetCheckboxFilters] = useState(false)
 	const vanTypeFilter = searchParams.get("type")
 	const sortByFilter = searchParams.get("sort_by")
 	const paramsKeys: string[] = []
@@ -116,33 +118,66 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 		})
 	}
 
+	const handleTypeSearchParam = (key: string, value: string) => {
+		setResetCheckboxFilters(!resetCheckboxFilters)
+		handleFilterChange(key, value)
+	}
+
 	const activeFilters = () => {
 		if (paramsKeys.length > 0) {
-			return paramsKeys.map((key) => (
-				<p
-					key={key}
-					className="group px-2 py-1 bg-gray-200 rounded-md text-sm"
-				>
-					{key.toString().charAt(0).toUpperCase() + key.toString().slice(1)}{" "}
-				</p>
-			))
+			return paramsKeys.map((key) => {
+				if (key === "type") {
+					return paramsValues.map((value) => {
+						if (
+							value === "simple" ||
+							value === "luxury" ||
+							value === "rugged"
+						) {
+							return (
+								<p className="px-2 py-1 bg-gray-200 rounded-md text-sm">
+									{value.charAt(0).toUpperCase() + value.slice(1)}
+								</p>
+							)
+						}
+					})
+				} else {
+					return (
+						<p
+							key={key}
+							className="px-2 py-1 bg-gray-200 rounded-md text-sm"
+						>
+							{key.charAt(0).toUpperCase() + key.slice(1)}{" "}
+						</p>
+					)
+				}
+			})
 		}
 	}
 
 	useEffect(() => {
 		if (vans) {
 			const filteredByType = filterByType(vans, vanTypeFilter)
+
 			const filteredByParams = filterByParams(filteredByType)
+			filteredByParams.length === 0 ? setNoVans(true) : setNoVans(false)
+
 			const sortedBy = sortBy(filteredByParams, sortByFilter)
 			setFilteredVans(sortedBy)
 		}
-	}, [sortByFilter, vans, setFilteredVans, searchParams, vanTypeFilter])
+	}, [
+		sortByFilter,
+		vans,
+		setFilteredVans,
+		searchParams,
+		vanTypeFilter,
+		setNoVans
+	])
 
 	return (
 		<div className="border-b border-gray-300 mb-4">
 			<div className="flex flex-wrap items-center gap-4 py-8">
 				<button
-					onClick={() => handleFilterChange("type", "simple")}
+					onClick={() => handleTypeSearchParam("type", "simple")}
 					className={`px-3 py-2 rounded-lg font-semibold ${
 						vanTypeFilter === "simple"
 							? `${vanTypeColour["simple"]} text-[#FFEAD0]`
@@ -152,7 +187,7 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 					Simple
 				</button>
 				<button
-					onClick={() => handleFilterChange("type", "luxury")}
+					onClick={() => handleTypeSearchParam("type", "luxury")}
 					className={`px-3 py-2 rounded-lg font-semibold ${
 						vanTypeFilter === "luxury"
 							? `${vanTypeColour["luxury"]} text-[#FFEAD0]`
@@ -162,7 +197,7 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 					Luxury
 				</button>
 				<button
-					onClick={() => handleFilterChange("type", "rugged")}
+					onClick={() => handleTypeSearchParam("type", "rugged")}
 					className={`px-3 py-2 rounded-lg font-semibold ${
 						vanTypeFilter === "rugged"
 							? `${vanTypeColour["rugged"]} text-[#FFEAD0]`
@@ -171,10 +206,15 @@ function Filters({ vanTypeColour, setFilteredVans }: FiltersProps) {
 				>
 					Rugged
 				</button>
-				<SortBy handleFilterChange={handleFilterChange} />
+				<SortBy
+					handleFilterChange={handleFilterChange}
+					resetCheckboxFilters={resetCheckboxFilters}
+					setResetCheckboxFilters={setResetCheckboxFilters}
+				/>
 				<CheckboxFilters
 					handleFilterChange={handleFilterChange}
 					paramsKeys={paramsKeys}
+					resetCheckboxFilters={resetCheckboxFilters}
 				/>
 			</div>
 

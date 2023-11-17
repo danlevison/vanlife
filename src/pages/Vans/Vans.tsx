@@ -9,6 +9,7 @@ import Loading from "@/components/Loading"
 export default function Vans() {
 	const { vans, setVans } = useContext(VansDataContext)
 	const [filteredVans, setFilteredVans] = useState<VanType[] | null>([])
+	const [noVans, setNoVans] = useState(false)
 	const [loading, setLoading] = useState(true)
 	const [imageLoading, setImageLoading] = useState(true)
 	const [error, setError] = useState<string | null>(null)
@@ -75,6 +76,7 @@ export default function Vans() {
 				Explore our van options
 			</h1>
 			<Filters
+				setNoVans={setNoVans}
 				vanTypeColour={vanTypeColour}
 				setFilteredVans={setFilteredVans}
 			/>
@@ -89,6 +91,13 @@ export default function Vans() {
 							vanTypeColour={vanTypeColour}
 						/>
 					))}
+				</div>
+			)}
+			{noVans && (
+				<div className="text-center">
+					<p className="text-lg">
+						Sorry, we haven't got any vans that match your search
+					</p>
 				</div>
 			)}
 		</div>

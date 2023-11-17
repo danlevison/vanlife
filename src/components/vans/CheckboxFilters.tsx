@@ -12,11 +12,13 @@ import { Label } from "../ui/label"
 type CheckboxFiltersProps = {
 	handleFilterChange: (key: string, value: string | null) => void
 	paramsKeys: string[]
+	resetCheckboxFilters: boolean
 }
 
 export default function CheckboxFilters({
 	handleFilterChange,
-	paramsKeys
+	paramsKeys,
+	resetCheckboxFilters
 }: CheckboxFiltersProps) {
 	const checkboxOptions = useMemo(
 		() => ["automatic", "manual", "festival friendly", "pet friendly"],
@@ -28,15 +30,23 @@ export default function CheckboxFilters({
 	const [checkedState, setCheckedState] = useState(
 		initialState || new Array(checkboxOptions.length).fill(false)
 	)
-	const [addedFilters, setAddedFilters] = useState<string[]>([])
 	const [uncheckedFilters, setUncheckedFilters] = useState<string[]>([])
+	const [addedFilters, setAddedFilters] = useState<string[]>([])
 
+	// this synchronises the state of checkboxes (checkedState) with the applied filters (paramsKeys) to ensure UI is updated.
 	useEffect(() => {
 		const updatedState = checkboxOptions.map((option) =>
 			paramsKeys.includes(option)
 		)
 		setCheckedState(updatedState)
 	}, [paramsKeys, checkboxOptions])
+
+	// resets added filters & unchecked filters array if a checkbox option is checked but then never applied or cleared
+	// this prevents a bug when a user then applies a sort by filter or van type filter after.
+	useEffect(() => {
+		setAddedFilters([])
+		setUncheckedFilters([])
+	}, [checkboxOptions.length, resetCheckboxFilters])
 
 	const handleChange = (
 		e: React.ChangeEvent<HTMLInputElement>,
@@ -76,8 +86,11 @@ export default function CheckboxFilters({
 	}
 
 	const handleFilterValues = () => {
+		// adds the search param with key=filter and value=true
 		addedFilters.forEach((filter) => handleFilterChange(filter, "true"))
+		// removes search param of key=filter
 		uncheckedFilters.forEach((filter) => handleFilterChange(filter, null))
+		// removes all filters
 		if (checkedState.every((element) => !element)) {
 			checkboxOptions.forEach((option) => handleFilterChange(option, null))
 		}
@@ -167,7 +180,7 @@ export default function CheckboxFilters({
 					onClick={clearAllFilters}
 					className="text-primaryText"
 				>
-					Clear All
+					Clear all
 				</Button>
 			)}
 		</>
