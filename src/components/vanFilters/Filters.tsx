@@ -134,7 +134,10 @@ function Filters({ vanTypeColour, setFilteredVans, setNoVans }: FiltersProps) {
 							value === "rugged"
 						) {
 							return (
-								<p className="px-2 py-1 bg-gray-200 rounded-md text-sm">
+								<p
+									key={value}
+									className="px-2 py-1 bg-gray-200 rounded-md text-sm"
+								>
 									{value.charAt(0).toUpperCase() + value.slice(1)}
 								</p>
 							)
@@ -175,7 +178,7 @@ function Filters({ vanTypeColour, setFilteredVans, setNoVans }: FiltersProps) {
 
 	return (
 		<div className="border-b border-gray-300 mb-4">
-			<div className="flex flex-wrap items-center gap-4 py-8">
+			<div className="flex flex-wrap justify-center md:justify-start items-center gap-4 py-8">
 				<button
 					onClick={() => handleTypeSearchParam("type", "simple")}
 					className={`px-3 py-2 rounded-lg font-semibold ${
@@ -218,7 +221,7 @@ function Filters({ vanTypeColour, setFilteredVans, setNoVans }: FiltersProps) {
 				/>
 			</div>
 
-			<div className="flex items-center gap-3 pb-2 text-primaryText">
+			<div className="flex flex-wrap justify-start items-center gap-3 pb-2 text-primaryText">
 				<p>
 					{paramsKeys.length} {paramsKeys.length === 1 ? "Filter" : "Filters"}
 				</p>

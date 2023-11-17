@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, useCallback } from "react"
 import VansDataContext from "../../context/VansDataContext"
 import { fetchVansData } from "../../api"
 import VanCard from "@/components/vans/VanCard"
-import Filters from "@/components/vans/Filters"
+import Filters from "@/components/vanFilters/Filters"
 import { VanType } from "@/types/vanType"
 import Loading from "@/components/Loading"
 
