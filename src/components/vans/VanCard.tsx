@@ -2,6 +2,8 @@ import { Link, useSearchParams } from "react-router-dom"
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { AiFillStar } from "react-icons/ai"
+import { PiPawPrint } from "react-icons/pi"
+import { MdOutlineFestival } from "react-icons/md"
 // types
 import { VanType } from "@/types/vanType"
 
@@ -12,6 +14,29 @@ type VanCardProps = {
 
 export default function VanCard({ van, vanTypeColour }: VanCardProps) {
 	const [searchParams] = useSearchParams()
+
+	const ruleIcons = (rules: string[]) => {
+		return rules.map((rule, idx) => {
+			switch (rule) {
+				case "Pet Friendly":
+					return (
+						<PiPawPrint
+							key={idx}
+							size={25}
+						/>
+					)
+				case "Festival Friendly":
+					return (
+						<MdOutlineFestival
+							key={idx}
+							size={25}
+						/>
+					)
+				default:
+					return null
+			}
+		})
+	}
 
 	return (
 		<Link
@@ -44,14 +69,16 @@ export default function VanCard({ van, vanTypeColour }: VanCardProps) {
 							className="text-yellow-500"
 						/>
 					</div>
-
-					<Badge
-						className={`px-3 py-2 text-[#FFEAD0] rounded-lg font-semibold ${
-							vanTypeColour[van.type.toLowerCase()] || "#00000"
-						}`}
-					>
-						{van.type}
-					</Badge>
+					<div className="flex items-center gap-2">
+						{ruleIcons(van.vehicle_rules)}
+						<Badge
+							className={`px-3 py-2 text-[#FFEAD0] rounded-lg font-semibold ${
+								vanTypeColour[van.type.toLowerCase()] || "#00000"
+							}`}
+						>
+							{van.type}
+						</Badge>
+					</div>
 				</CardFooter>
 			</Card>
 		</Link>

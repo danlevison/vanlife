@@ -48,42 +48,168 @@ function Filters({ vanTypeColour, setFilteredVans, setNoVans }: FiltersProps) {
 			return vans
 		}
 
-		const transmissionFilter = vans.filter((van) => {
-			return paramsKeys.some((key) => {
-				if (
-					van.vehicle_details &&
-					typeof van.vehicle_details === "object" &&
-					"Transmission" in van.vehicle_details &&
-					typeof van.vehicle_details.Transmission === "string"
-				) {
-					return (
-						van.vehicle_details?.Transmission?.toLowerCase() ===
-						key.toLowerCase()
-					)
-				}
-			})
+		const getAutomaticVans = vans.filter((van) => {
+			if (
+				van.vehicle_details &&
+				typeof van.vehicle_details === "object" &&
+				"Transmission" in van.vehicle_details &&
+				typeof van.vehicle_details.Transmission === "string"
+			) {
+				return van.vehicle_details?.Transmission?.toLowerCase() === "automatic"
+			}
 		})
 
-		const ruleFilter = vans.filter((van) => {
-			return paramsKeys.some((key) => {
-				return van.vehicle_rules.some((rule) =>
-					rule.toLowerCase().includes(key.toLowerCase())
-				)
-			})
+		const getManualVans = vans.filter((van) => {
+			if (
+				van.vehicle_details &&
+				typeof van.vehicle_details === "object" &&
+				"Transmission" in van.vehicle_details &&
+				typeof van.vehicle_details.Transmission === "string"
+			) {
+				return van.vehicle_details?.Transmission?.toLowerCase() === "manual"
+			}
 		})
 
-		// If only transmission filter is applied, return the transmission-filtered vans directly
-		if (ruleFilter.length === 0) {
-			return transmissionFilter
+		const getPetFriendlyVans = vans.filter((van) => {
+			return van.vehicle_rules.some(
+				(rule) => rule.toLowerCase() === "pet friendly"
+			)
+		})
+
+		const getFestivalFriendlyVans = vans.filter((van) => {
+			return van.vehicle_rules.some(
+				(rule) => rule.toLowerCase() === "festival friendly"
+			)
+		})
+
+		if (
+			paramsKeys.includes("automatic") &&
+			paramsKeys.includes("manual") &&
+			paramsKeys.includes("festival friendly") &&
+			paramsKeys.includes("pet friendly")
+		) {
+			return vans
 		}
 
-		// If only rule-based filter is applied, return the rule-filtered vans directly
-		if (transmissionFilter.length === 0) {
-			return ruleFilter
+		// transmission & pet/festival friendly filters
+
+		// returns automatic vans that are pet friendly and festival friendly van
+		if (
+			paramsKeys.includes("automatic") &&
+			paramsKeys.includes("pet friendly") &&
+			paramsKeys.includes("festival friendly")
+		) {
+			return getAutomaticVans.filter(
+				(van) =>
+					getPetFriendlyVans.includes(van) &&
+					getFestivalFriendlyVans.includes(van)
+			)
 		}
 
-		// Use set intersection if both filters are applied
-		return transmissionFilter.filter((van) => ruleFilter.includes(van))
+		// returns manual vans that are pet friendly and festival friendly van
+		if (
+			paramsKeys.includes("manual") &&
+			paramsKeys.includes("pet friendly") &&
+			paramsKeys.includes("festival friendly")
+		) {
+			return getManualVans.filter(
+				(van) =>
+					getPetFriendlyVans.includes(van) &&
+					getFestivalFriendlyVans.includes(van)
+			)
+		}
+
+		// returns automatic and manual vans (all vans) that are festival friendly
+		if (
+			paramsKeys.includes("automatic") &&
+			paramsKeys.includes("manual") &&
+			paramsKeys.includes("festival friendly")
+		) {
+			return getFestivalFriendlyVans
+		}
+
+		// returns automatic and manual vans (all vans) that are festival friendly
+		if (
+			paramsKeys.includes("automatic") &&
+			paramsKeys.includes("manual") &&
+			paramsKeys.includes("pet friendly")
+		) {
+			return getPetFriendlyVans
+		}
+
+		// returns automatic and pet friendly vans
+		if (
+			paramsKeys.includes("automatic") &&
+			paramsKeys.includes("pet friendly")
+		) {
+			return getAutomaticVans.filter((van) => getPetFriendlyVans.includes(van))
+		}
+
+		// returns manual and pet friendly vans
+		if (paramsKeys.includes("manual") && paramsKeys.includes("pet friendly")) {
+			return getManualVans.filter((van) => getPetFriendlyVans.includes(van))
+		}
+
+		// returns automatic and festival friendly vans
+		if (
+			paramsKeys.includes("automatic") &&
+			paramsKeys.includes("festival friendly")
+		) {
+			return getAutomaticVans.filter((van) =>
+				getFestivalFriendlyVans.includes(van)
+			)
+		}
+
+		// returns manual and festival friendly vans
+		if (
+			paramsKeys.includes("manual") &&
+			paramsKeys.includes("festival friendly")
+		) {
+			return getManualVans.filter((van) =>
+				getFestivalFriendlyVans.includes(van)
+			)
+		}
+
+		// transmission filters
+
+		// returns manual and automatic vans
+		if (paramsKeys.includes("manual") && paramsKeys.includes("automatic")) {
+			return [...getManualVans, ...getAutomaticVans]
+		}
+
+		// returns manual vans
+		if (paramsKeys.includes("manual")) {
+			return getManualVans
+		}
+
+		// returns automatic vans
+		if (paramsKeys.includes("automatic")) {
+			return getAutomaticVans
+		}
+
+		// pet/festival friendly filters
+
+		// returns pet friendly and festival friendly vans
+		if (
+			paramsKeys.includes("pet friendly") &&
+			paramsKeys.includes("festival friendly")
+		) {
+			return getPetFriendlyVans.filter((van) =>
+				getFestivalFriendlyVans.includes(van)
+			)
+		}
+
+		// returns pet friendly vans
+		if (paramsKeys.includes("pet friendly")) {
+			return getPetFriendlyVans
+		}
+
+		// returns festival friendly vans
+		if (paramsKeys.includes("festival friendly")) {
+			return getFestivalFriendlyVans
+		}
+
+		return vans
 	}
 
 	const sortBy = (vans: VanType[], sortByFilter: string | null): VanType[] => {
