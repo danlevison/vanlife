@@ -244,7 +244,7 @@ function Filters({ vanTypeColour, setFilteredVans, setNoVans }: FiltersProps) {
 		})
 	}
 
-	const handleTypeSearchParam = (key: string, value: string) => {
+	const handleAddTypeSearchParam = (key: string, value: string) => {
 		setResetCheckboxFilters(!resetCheckboxFilters)
 		handleFilterChange(key, value)
 	}
@@ -306,7 +306,7 @@ function Filters({ vanTypeColour, setFilteredVans, setNoVans }: FiltersProps) {
 		<div className="border-b border-gray-300 mb-4">
 			<div className="flex flex-wrap justify-center md:justify-start items-center gap-4 py-8">
 				<button
-					onClick={() => handleTypeSearchParam("type", "simple")}
+					onClick={() => handleAddTypeSearchParam("type", "simple")}
 					className={`px-3 py-2 rounded-lg font-semibold ${
 						vanTypeFilter === "simple"
 							? `${vanTypeColour["simple"]} text-[#FFEAD0]`
@@ -316,7 +316,7 @@ function Filters({ vanTypeColour, setFilteredVans, setNoVans }: FiltersProps) {
 					Simple
 				</button>
 				<button
-					onClick={() => handleTypeSearchParam("type", "luxury")}
+					onClick={() => handleAddTypeSearchParam("type", "luxury")}
 					className={`px-3 py-2 rounded-lg font-semibold ${
 						vanTypeFilter === "luxury"
 							? `${vanTypeColour["luxury"]} text-[#FFEAD0]`
@@ -326,7 +326,7 @@ function Filters({ vanTypeColour, setFilteredVans, setNoVans }: FiltersProps) {
 					Luxury
 				</button>
 				<button
-					onClick={() => handleTypeSearchParam("type", "rugged")}
+					onClick={() => handleAddTypeSearchParam("type", "rugged")}
 					className={`px-3 py-2 rounded-lg font-semibold ${
 						vanTypeFilter === "rugged"
 							? `${vanTypeColour["rugged"]} text-[#FFEAD0]`

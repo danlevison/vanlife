@@ -86,11 +86,11 @@ export default function CheckboxFilters({
 	}
 
 	const handleFilterValues = () => {
-		// adds the search param with key=filter and value=true
+		// adds the search param with key=filter and value=true for the checked checkboxes
 		addedFilters.forEach((filter) => handleFilterChange(filter, "true"))
-		// removes search param of key=filter
+		// removes search param of key=filter for the unchecked checkboxes
 		uncheckedFilters.forEach((filter) => handleFilterChange(filter, null))
-		// removes all filters
+		// removes all filters if all checkboxes are unchecked
 		if (checkedState.every((element) => !element)) {
 			checkboxOptions.forEach((option) => handleFilterChange(option, null))
 		}

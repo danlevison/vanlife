@@ -11,10 +11,12 @@ import Contact from "./pages/Contact"
 import AuthRequired from "./components/layouts/AuthRequired"
 import UserDashboard from "./pages/user/UserDashboard"
 import UserDetails from "./pages/user/UserDetails"
-import DetailsLayout from "./components/layouts/DetailsLayout"
+import UserDetailsLayout from "./components/layouts/UserDetailsLayout"
 import UserSecurityLogin from "./pages/user/UserSecurityLogin"
 import UpdatePassword from "./pages/UpdatePassword"
-
+import HostLayout from "./components/layouts/HostLayout"
+import Dashboard from "./pages/host/Dashboard"
+import ListCampervan from "./pages/ListCampervan"
 function App() {
 	return (
 		<BrowserRouter>
@@ -39,6 +41,10 @@ function App() {
 								element={<Contact />}
 							/>
 							<Route
+								path="list-my-campervan"
+								element={<ListCampervan />}
+							/>
+							<Route
 								path="vans"
 								element={<Vans />}
 							/>
@@ -54,10 +60,20 @@ function App() {
 
 						<Route element={<AuthRequired />}>
 							<Route
+								path="host"
+								element={<HostLayout />}
+							>
+								<Route
+									index
+									element={<Dashboard />}
+								/>
+							</Route>
+
+							<Route
 								path="user"
 								element={<UserDashboard />}
 							/>
-							<Route element={<DetailsLayout />}>
+							<Route element={<UserDetailsLayout />}>
 								<Route
 									path="user/details"
 									element={<UserDetails />}

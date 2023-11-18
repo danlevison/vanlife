@@ -43,7 +43,7 @@ export default function Footer() {
 							</li>
 							<li>
 								<Link
-									to={"host"}
+									to={"list-my-campervan"}
 									className="tracking-wide hover:text-accent cursor-pointer duration-300"
 								>
 									List my camper

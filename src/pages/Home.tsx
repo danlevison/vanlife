@@ -17,7 +17,7 @@ export default function Home() {
 					</p>
 					<Link
 						to="vans"
-						className="bg-accent border border-black rounded-md p-2 w-full sm:w-[300px] text-white text-center text-lg font-bold hover:opacity-70 duration-300"
+						className="bg-accent border border-black rounded-md p-2 w-full sm:w-[300px] text-white text-center text-lg font-bold hover:bg-accent/80 duration-300"
 					>
 						Find your van
 					</Link>

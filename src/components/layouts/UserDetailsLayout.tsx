@@ -1,6 +1,6 @@
 import { Outlet, NavLink } from "react-router-dom"
 
-export default function DetailsLayout() {
+export default function UserDetailsLayout() {
 	const activeStyles =
 		"font-bold bg-[#F2F2F2] border-b sm:border-b-0 sm:border-r border-black p-5 sm:rounded-l-lg"
 

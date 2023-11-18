@@ -80,14 +80,14 @@ export default function Nav() {
 					</li>
 					<li>
 						<NavLink
-							to="host"
+							to="list-my-campervan"
 							className={({ isActive }) =>
 								isActive
 									? activeStyles
 									: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
 							}
 						>
-							Host
+							List your van
 						</NavLink>
 					</li>
 					<li>{user ? <ProfilePopover /> : <AuthPopover />}</li>

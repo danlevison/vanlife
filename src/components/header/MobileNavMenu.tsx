@@ -57,7 +57,7 @@ export default function MobileNavMenu({
 						</li>
 						<li>
 							<NavLink
-								to="host"
+								to="list-my-campervan"
 								onClick={handleNav}
 								className={({ isActive }) =>
 									isActive
@@ -65,7 +65,7 @@ export default function MobileNavMenu({
 										: "hover:text-secondaryAccent hover:border-b-2 border-secondaryAccent py-1"
 								}
 							>
-								Host
+								List your van
 							</NavLink>
 						</li>
 					</ul>
