@@ -21,23 +21,31 @@ export default function ProfilePopover() {
 			<PopoverContent align="end">
 				<div className="text-center pb-4">
 					<h2 className="text-2xl">{usersName}</h2>
-					<p className="text-[#BFBFBF]">{usersEmail}</p>
+					<p className="text-[#737373]">{usersEmail}</p>
 				</div>
-				<ul className="border-y border-gray-[#BFBFBF] py-4">
-					<li className="py-2">
+				<ul className="border-t border-gray-300">
+					<li className="pt-3 pb-2">
 						<Link
 							to="user"
-							className="hover:text-accent duration-150"
+							className="text-[#737373] hover:text-accent duration-150"
 						>
 							My profile
 						</Link>
 					</li>
-					<li className="py-2">
+					<li className="pb-3 pt-2">
 						<Link
 							to="user/details"
-							className="hover:text-accent duration-150"
+							className="text-[#737373] hover:text-accent duration-150"
 						>
 							Account details
+						</Link>
+					</li>
+					<li className="py-3 border-y border-gray-300 ">
+						<Link
+							to="host"
+							className="text-[#737373] hover:text-accent duration-150"
+						>
+							Host dashboard
 						</Link>
 					</li>
 				</ul>

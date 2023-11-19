@@ -19,9 +19,9 @@ export default function UserDashboard() {
 					</p>
 				</div>
 
-				<div className="flex flex-col md:flex-row items-center gap-10 pt-10">
+				<div className="flex flex-col md:flex-row md:items-center gap-10 pt-10">
 					<Link
-						to={"details"}
+						to={"/host"}
 						className="hover:scale-[1.02] duration-300"
 					>
 						<div className="flex flex-col justify-center p-5 rounded-lg bg-white shadow-lg sm:w-[350px] h-[200px]">
@@ -30,7 +30,7 @@ export default function UserDashboard() {
 								className="text-secondaryAccent"
 							/>
 							<h2 className="text-2xl py-2">Hosted vans</h2>
-							<p>Review and update your personal details</p>
+							<p>Review and update your listed vans</p>
 						</div>
 					</Link>
 					<Link

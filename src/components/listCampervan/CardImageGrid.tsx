@@ -28,8 +28,8 @@ export default function CardImageGrid() {
 				</div>
 				<div className="flex flex-grow justify-center border-b border-gray-300 pb-5">
 					<Link
-						to="/"
-						className="mt-5 sm:mt-10 py-4 px-6 bg-accent rounded-md text-white hover:bg-accent/80 duration-300"
+						to="/host"
+						className="mt-5 sm:mt-10 py-3 px-6 bg-accent rounded-md text-white hover:bg-accent/80 duration-300"
 					>
 						Start listing
 					</Link>

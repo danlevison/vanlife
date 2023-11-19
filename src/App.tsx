@@ -17,6 +17,7 @@ import UpdatePassword from "./pages/UpdatePassword"
 import HostLayout from "./components/layouts/HostLayout"
 import Dashboard from "./pages/host/Dashboard"
 import ListCampervan from "./pages/ListCampervan"
+import SignInPage from "./pages/SignInPage"
 function App() {
 	return (
 		<BrowserRouter>
@@ -57,6 +58,11 @@ function App() {
 								element={<UpdatePassword />}
 							/>
 						</Route>
+
+						<Route
+							path="sign-in"
+							element={<SignInPage />}
+						/>
 
 						<Route element={<AuthRequired />}>
 							<Route
