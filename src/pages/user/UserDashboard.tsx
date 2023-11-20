@@ -12,7 +12,7 @@ export default function UserDashboard() {
 				<div>
 					<h1 className="text-3xl md:text-4xl">
 						<span className="text-lg md:text-xl font-normal">Hello, </span>
-						{user?.user_metadata.first_name}
+						{user?.user_metadata.name}
 					</h1>
 					<p className="pt-2">
 						Access your hosted vans and your account settings below

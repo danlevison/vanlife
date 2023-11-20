@@ -10,7 +10,7 @@ import { Button } from "../ui/button"
 
 export default function ProfilePopover() {
 	const { user, signOut } = useAuth()
-	const usersName = user?.user_metadata.first_name
+	const usersName = user?.user_metadata.name
 	const usersEmail = user?.email
 
 	return (

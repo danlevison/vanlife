@@ -20,7 +20,7 @@ export default function MobileNavUserProfile({
 			<div className="flex items-center gap-4">
 				<VscAccount size={25} />
 				<div>
-					<h3 className="text-lg">{user?.user_metadata.first_name}</h3>
+					<h3 className="text-lg">{user?.user_metadata.name}</h3>
 					<p className="text-sm">{user?.email}</p>
 				</div>
 			</div>

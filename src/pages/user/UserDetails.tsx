@@ -10,7 +10,7 @@ export default function UserDetails() {
 			<ul className="flex flex-col">
 				<UserDetailItem
 					label="Name"
-					value={user?.user_metadata.first_name}
+					value={user?.user_metadata.name}
 				/>
 				<UserDetailItem
 					label="Country of residence"
@@ -22,7 +22,7 @@ export default function UserDetails() {
 				/>
 				<UserDetailItem
 					label="Phone number"
-					value={user?.user_metadata.phone_number}
+					value={user?.user_metadata.phone}
 				/>
 				<UserDetailItem
 					label="Email"
