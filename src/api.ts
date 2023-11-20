@@ -39,6 +39,14 @@ export async function signInUser(email: string, password: string) {
 	return data
 }
 
+export async function signInWithGoogle() {
+	const { data } = await supabase.auth.signInWithOAuth({
+		provider: "google"
+	})
+
+	return data
+}
+
 export async function sendResetPasswordEmail(email: string) {
 	const { data } = await supabase.auth.resetPasswordForEmail(email, {
 		redirectTo: "https://yourvanlife.netlify.app/update-password"

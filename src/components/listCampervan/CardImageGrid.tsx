@@ -40,7 +40,7 @@ export default function CardImageGrid() {
 				<img
 					src={listCampervanImg}
 					alt="Photo of a campervan next to a lake at sunset"
-					className="rounded-b-lg md:rounded-lg w-full md:h-[500px]"
+					className="rounded-b-lg md:rounded-lg w-full md:h-[500px] shadow-md md:shadow-none"
 					style={{
 						objectFit: "cover",
 						objectPosition: "center"

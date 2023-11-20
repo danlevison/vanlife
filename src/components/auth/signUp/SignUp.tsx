@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { Button } from "../../ui/button"
+import { MdOutlineEmail } from "react-icons/md"
 import SignUpForm from "./SignUpForm"
+import GoogleSignInButton from "../GoogleSignInButton"
 
 type SignUpProps = {
 	switchToSignIn: () => void
@@ -25,12 +27,14 @@ export default function SignUp({ switchToSignIn }: SignUpProps) {
 		</div>
 	) : (
 		<>
-			<h2 className="text-center text-2xl">Sign up</h2>
+			<h2 className="text-center text-2xl pb-3">Sign up</h2>
+			<GoogleSignInButton />
 			<Button
 				onClick={() => setShowSignUpForm(!showSignUpForm)}
-				className="w-full mt-2"
+				className="flex justify-center items-center gap-2 w-full mt-2"
 			>
-				Continue with email
+				<MdOutlineEmail size={25} />
+				<span>Continue with email</span>
 			</Button>
 			{showSignUpForm && <SignUpForm setSignedUp={setSignedUp} />}
 			<div className="flex justify-center items-center">
