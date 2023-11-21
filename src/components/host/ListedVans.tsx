@@ -2,7 +2,7 @@ import { useEffect, useCallback, useState, useContext } from "react"
 import { Link } from "react-router-dom"
 import { fetchHostVansData } from "@/api"
 import VansDataContext from "@/context/VansDataContext"
-import Loading from "../../Loading"
+import Loading from "../Loading"
 import HostVan from "./HostVan"
 
 function ListedVans() {
@@ -17,7 +17,6 @@ function ListedVans() {
 		try {
 			const data = await fetchHostVansData()
 			setHostVans(data)
-			console.log(data)
 		} catch (error) {
 			setError("Unable to fetch listed vans!")
 			console.error(error)

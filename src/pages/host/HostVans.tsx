@@ -22,7 +22,6 @@ export default function HostVans() {
 		try {
 			const data = await fetchHostVansData()
 			setHostVans(data)
-			console.log(data)
 		} catch (error) {
 			setError("Unable to fetch listed vans!")
 			console.error(error)
