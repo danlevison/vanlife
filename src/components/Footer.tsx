@@ -20,7 +20,7 @@ export default function Footer() {
 	const currentYear = new Date().getFullYear()
 	return (
 		<footer className="bg-background w-full">
-			<div className="w-full max-w-[1440px] mx-auto px-6 sm:px-8">
+			<div className="w-full max-w-[1240px] mx-auto px-8">
 				<div className="flex flex-col md:flex-row justify-between gap-10 md:gap-16 pt-16 md:pt-28 pb-10">
 					<div className="text-primaryText">
 						<h3 className="text-2xl font-bold uppercase">#Vanlife</h3>

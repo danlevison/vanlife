@@ -71,7 +71,7 @@ export default function Vans() {
 	}
 
 	return (
-		<div className="flex flex-col min-h-screen max-w-[1440px] mx-auto px-8 py-20">
+		<div className="flex flex-col min-h-screen max-w-[1240px] mx-auto px-8 py-20">
 			<h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-primaryText text-center md:text-left pt-8">
 				Explore our van options
 			</h1>

@@ -3,7 +3,7 @@ import listCampervanImg from "@/assets/list-campervan-img.jpg"
 
 export default function CardImageGrid() {
 	return (
-		<section className="flex flex-col justify-center items-center md:grid grid-cols-10">
+		<section className="flex flex-col justify-center items-center md:grid grid-cols-10 px-8">
 			<div className="row-span-full col-span-6 col-end-6 self-center h-[450px] w-full md:max-w-[450px] bg-white p-8 rounded-t-lg md:rounded-lg shadow-md">
 				<h1 className="text-2xl sm:text-3xl">Rent out my campervan</h1>
 				<p className="pt-2">

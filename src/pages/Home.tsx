@@ -7,7 +7,7 @@ export default function Home() {
 		<>
 			<section className="relative flex justify-center items-center min-h-screen bg-[url('./assets/hero-bg-img.jpg')] bg-cover bg-no-repeat bg-center px-8">
 				<div className="absolute inset-0 bg-black/60" />
-				<div className="relative flex flex-col justify-center items-center max-w-[1440px] text-center">
+				<div className="relative flex flex-col justify-center items-center max-w-[1240px] text-center">
 					<h1 className="text-white text-4xl sm:text-5xl md:text-6xl">
 						You got the travel plans, we got the travel vans.
 					</h1>

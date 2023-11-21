@@ -19,7 +19,7 @@ export default function Contact() {
 					style={{ objectFit: "cover" }}
 				/>
 			</div>
-			<div className="max-w-[1440px] w-full px-8 pt-20 md:pt-10">
+			<div className="max-w-[1240px] w-full px-8 pt-20 md:pt-10">
 				<h2 className="text-center w-full max-w-[800px] text-lg sm:text-xl md:text-2xl pb-6 mx-auto">
 					Please don’t hesitate to get in touch with any queries by filling in
 					the contact form below.

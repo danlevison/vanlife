@@ -7,7 +7,7 @@ import {
 
 export default function Questions() {
 	return (
-		<section className="max-w-[1240px] w-full mt-16">
+		<section className="max-w-[1240px] w-full mt-16 px-8">
 			<h3 className="text-xl sm:text-2xl">Frequently asked questions</h3>
 			<Accordion
 				type="single"

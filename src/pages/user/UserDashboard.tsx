@@ -8,7 +8,7 @@ export default function UserDashboard() {
 
 	return (
 		<div className="flex flex-col items-center w-full min-h-screen">
-			<div className="py-40 px-10 max-w-[1440px]">
+			<div className="py-40 px-10 max-w-[1240px]">
 				<div>
 					<h1 className="text-3xl md:text-4xl">
 						<span className="text-lg md:text-xl font-normal">Hello, </span>

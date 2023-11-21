@@ -50,7 +50,7 @@ export default function SellingPointsGrid() {
 		}
 	]
 	return (
-		<section className="flex flex-col justify-center items-center max-w-[1440px] mx-auto py-20 px-8">
+		<section className="flex flex-col justify-center items-center max-w-[1240px] mx-auto py-20 px-8">
 			<h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center pb-12">
 				The leading road trip service in North America, Oceania, and Europe
 			</h2>

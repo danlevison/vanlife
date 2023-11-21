@@ -22,7 +22,7 @@ export default function HowToList() {
 		}
 	]
 	return (
-		<section className="flex flex-col pt-10 md:pt-32">
+		<section className="flex flex-col pt-10 md:pt-32 px-8">
 			<h2 className="text-xl sm:text-2xl pb-6">
 				How to rent out my campervan?
 			</h2>

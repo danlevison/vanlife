@@ -4,7 +4,7 @@ import people from "@/assets/people-campervan.jpg"
 
 export default function CampervanDisplay() {
 	return (
-		<section className="max-w-[1440px] mx-auto px-8">
+		<section className="max-w-[1240px] mx-auto px-8">
 			<div className="flex flex-col md:flex-row justify-between items-center gap-2 md:gap-10 max-w-[500px] md:max-w-none mx-auto shadow-lg rounded-lg md:shadow-none md:rounded-none lg:p-0">
 				<div className="order-1 flex flex-col justify-center lg:max-w-[600px] p-4 lg:p-0">
 					<h2 className="text-xl sm:text-2xl">
