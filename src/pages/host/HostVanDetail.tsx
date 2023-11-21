@@ -79,7 +79,7 @@ export default function HostVanDetail() {
 		<section className="flex flex-col w-full max-w-[1240px] mx-auto p-8">
 			<div className="flex items-center gap-2 pb-2">
 				<Link
-					to={".."}
+					to={"/host/vans"}
 					relative="path"
 					className="order-1 underline"
 				>
