@@ -22,6 +22,7 @@ import Income from "./pages/host/Income"
 import Reviews from "./pages/host/Reviews"
 import HostVans from "./pages/host/HostVans"
 import HostVanDetail from "./pages/host/HostVanDetail"
+import NotFound from "./pages/NotFound"
 function App() {
 	return (
 		<BrowserRouter>
@@ -33,6 +34,10 @@ function App() {
 							path="/"
 							element={<Layout />}
 						>
+							<Route
+								path="*"
+								element={<NotFound />}
+							/>
 							<Route
 								index
 								element={<Home />}
