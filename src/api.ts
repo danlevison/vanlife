@@ -5,6 +5,14 @@ export async function fetchVansData() {
 	return data
 }
 
+export async function fetchHostVansData() {
+	const { data } = await supabase
+		.from("vans")
+		.select()
+		.not("hostId", "is", null)
+	return data
+}
+
 export async function fetchVanData(id: string) {
 	const { data } = await supabase.from("vans").select().eq("vanId", id)
 	return data

@@ -54,7 +54,7 @@ export default function Nav() {
 
 	return (
 		<nav
-			className={`fixed w-full bg-[#fff7ed] h-16 px-10 z-50 duration-300 ${
+			className={`fixed w-full bg-[#fff7ed] h-16 px-8 z-50 duration-300 ${
 				scrollY > 0 ||
 				pathname === "/user" ||
 				pathname === "/user/details" ||

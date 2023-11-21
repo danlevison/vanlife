@@ -58,7 +58,7 @@ export default function Vans() {
 
 	if (error) {
 		return (
-			<div className="flex flex-col items-center min-h-screen py-32">
+			<div className="flex flex-col items-center min-h-screen py-32 px-8">
 				<h1 className="text-center text-4xl pb-3">{error}</h1>
 				<button
 					onClick={loadVansData}
