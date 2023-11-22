@@ -85,7 +85,7 @@ export default function VanDetail() {
 	}
 
 	return (
-		<div className="min-h-screen mx-auto px-8 py-24">
+		<div className="min-h-screen mx-auto px-8 pt-24">
 			<div className="flex items-center gap-2 pb-2">
 				<Link
 					to={`..${search}`}
