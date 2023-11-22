@@ -118,7 +118,12 @@ export default function UserSecurityLogin() {
 				noValidate
 			>
 				<div>
-					<Label htmlFor="currentPassword">Current password*</Label>
+					<Label
+						htmlFor="currentPassword"
+						className="text-base"
+					>
+						Current password*
+					</Label>
 					<Input
 						onChange={handleChange}
 						value={formData.currentPassword}
@@ -137,7 +142,12 @@ export default function UserSecurityLogin() {
 					)}
 				</div>
 				<div>
-					<Label htmlFor="newPassword">New password*</Label>
+					<Label
+						htmlFor="newPassword"
+						className="text-base"
+					>
+						New password*
+					</Label>
 					<Input
 						onChange={handleChange}
 						value={formData.newPassword}
@@ -154,7 +164,12 @@ export default function UserSecurityLogin() {
 					)}
 				</div>
 				<div>
-					<Label htmlFor="confirmPassword">Confirm password*</Label>
+					<Label
+						htmlFor="confirmPassword"
+						className="text-base"
+					>
+						Confirm password*
+					</Label>
 					<Input
 						onChange={handleChange}
 						value={formData.confirmPassword}

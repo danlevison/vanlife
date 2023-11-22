@@ -68,3 +68,15 @@ export async function updatePassword(newPassword: string) {
 	})
 	return data
 }
+
+export async function updateUserDetails(
+	name: string,
+	country: string,
+	dob: string,
+	phone: string
+) {
+	const { data } = await supabase.auth.updateUser({
+		data: { name, country, date_of_birth: dob, phone }
+	})
+	return data
+}
