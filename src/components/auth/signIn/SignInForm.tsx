@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { Label } from "../../ui/label"
 import { Input } from "../../ui/input"
 import { Button } from "../../ui/button"
@@ -18,6 +18,7 @@ export default function SignInForm() {
 	})
 	const [loading, setLoading] = useState(false)
 	const navigate = useNavigate()
+	const location = useLocation()
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setFormData((prevFormData) => {
@@ -60,9 +61,9 @@ export default function SignInForm() {
 				formData.signInEmail,
 				formData.signInPassword
 			)
-			//TODO: use history to navigate user to page they were at when logging in.
-			if (data.user) {
-				navigate("/")
+
+			if (data.user && location.state?.from) {
+				navigate(location.state.from)
 			}
 
 			if (!data.user) {
