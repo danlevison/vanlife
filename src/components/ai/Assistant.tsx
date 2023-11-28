@@ -68,7 +68,7 @@ export default function Assistant() {
 			body: userInput
 		})
 		const data = await response.json()
-		setAsstResponse((data[0].content[0] as MessageContentText).text.value)
+		return data
 	}
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -77,7 +77,10 @@ export default function Assistant() {
 		try {
 			setLoading(true)
 			setError(null)
-			await fetchReply()
+			const data = await fetchReply()
+			setAsstResponse(
+				(data.reply[0].content[0] as MessageContentText).text.value
+			)
 		} catch (error) {
 			console.error(error)
 			setError("Sorry, something went wrong. Please try again.")
