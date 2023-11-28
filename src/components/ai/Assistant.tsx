@@ -4,9 +4,9 @@ import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { BsFillChatSquareDotsFill } from "react-icons/bs"
 import { FaAngleDown } from "react-icons/fa"
-// import vanInfo from "./vansInfo.txt"
 import Lottie from "lottie-react"
 import typingAnimation from "@/assets/typing-animation.json"
+// import vanInfo from "./vansInfo.txt"
 //types
 import { MessageContentText } from "openai/resources/beta/threads/messages/messages.mjs"
 
@@ -17,8 +17,6 @@ export default function Assistant() {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
 	const inputRef = useRef<HTMLInputElement>(null)
-	// const assistantID = "asst_619dFmW3XVqF7ZGxZ7p4wE3m"
-	// const threadID = "thread_htFn6hZERUUOEHYpNTKOYQc9"
 
 	// const getFile = async () => {
 	// 	// Upload a file with an "assistants" purpose
@@ -39,7 +37,7 @@ export default function Assistant() {
 	// 		name: "#VANLIFE assistant",
 	// 		tools: [{ type: "retrieval" }],
 	// 		model: "gpt-4-1106-preview",
-	// 		file_ids: ["file-4yjtaezldjIBu78NcfBiA69U"]
+	// 		file_ids: ["file-Bsm95hQxzHhLX5zvA5NV8wZj"]
 	// 	})
 
 	// 	console.log(myAssistant)
@@ -53,8 +51,6 @@ export default function Assistant() {
 	// }
 
 	// threadFunc()
-
-	/* -- Assistants API Functions -- */
 
 	const fetchReply = async () => {
 		const url =
@@ -105,7 +101,7 @@ export default function Assistant() {
 			</div>
 			<div className="flex flex-col gap-5 m-3 max-h-[350px] overflow-y-auto">
 				<p className="bg-gray-200 p-3 rounded-lg">
-					Hello, I am the #VANLIFE assistant. I can provide you some information
+					Hello, I am the #VANLIFE assistant. I can provide you information
 					about our listed campers or recommend you a campervan based on your
 					type of adventure.
 				</p>
@@ -138,7 +134,10 @@ export default function Assistant() {
 		</div>
 	) : (
 		<div className="hidden md:block fixed bottom-2 right-5">
-			<button onClick={() => setShowChat(true)}>
+			<button
+				onClick={() => setShowChat(true)}
+				disabled
+			>
 				<BsFillChatSquareDotsFill
 					size={50}
 					className="text-accent hover:text-accent/80"

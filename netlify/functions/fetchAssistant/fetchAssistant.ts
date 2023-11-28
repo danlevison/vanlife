@@ -1,12 +1,10 @@
-import OpenAI from "openai"
+import { openai } from "@/config/openAiConfig"
 import { Handler } from "@netlify/functions"
 
-const openai = new OpenAI({
-	apiKey: process.env.VITE_OPENAI_API_KEY
-})
+const assistantID = "asst_cLGuLi23Mr7BIKAuUiXZSLqA"
+const threadID = "thread_ToIifOgRGrqjdfiVgcxh6luv"
 
-const assistantID = "asst_619dFmW3XVqF7ZGxZ7p4wE3m"
-const threadID = "thread_htFn6hZERUUOEHYpNTKOYQc9"
+/* -- Assistants API Functions -- */
 
 // Create a message
 const createMessage = async (input: string) => {
@@ -20,8 +18,8 @@ const createMessage = async (input: string) => {
 const runThread = async () => {
 	const run = await openai.beta.threads.runs.create(threadID, {
 		assistant_id: assistantID,
-		model: "gpt-3.5-turbo-1106",
-		instructions: `Only reply about campervans in the provided file. If questions are not related to campervans or you really don't know the answer, say "I'm sorry, I don't know the answer to that." And direct the questioner to email help@vanlife.com. Don't try to make up an answer. Never include sources or annotations in your reply. Keep your answers short.`,
+		model: "gpt-4-1106-preview",
+		instructions: `Only reply about campervans in the provided file. If questions are not related to campervans or you really don't know the answer, say "I'm sorry, I don't know the answer to that." and direct the questioner to email help@vanlife.com. Don't try to make up an answer. Never include sources or annotations in your reply. Keep your answers short.`,
 		tools: [{ type: "retrieval" }]
 	})
 	return run
