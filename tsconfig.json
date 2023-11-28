@@ -25,6 +25,6 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true
 	},
-	"include": ["src", "netlify/functions/fetchAssistant/fetchAssistant.mts"],
+	"include": ["src", "netlify/functions/fetchAssistant/fetchAssistant.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

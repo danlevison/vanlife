@@ -1,5 +1,5 @@
 import { useState, useRef } from "react"
-import { openai } from "@/config/openAiConfig"
+// import { openai } from "@/config/openAiConfig"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { BsFillChatSquareDotsFill } from "react-icons/bs"
@@ -13,12 +13,12 @@ import { MessageContentText } from "openai/resources/beta/threads/messages/messa
 export default function Assistant() {
 	const [showChat, setShowChat] = useState(false)
 	const [userInput, setUserInput] = useState("")
-	const [response, setResponse] = useState<string | null>(null)
+	const [asstResponse, setAsstResponse] = useState<string | null>(null)
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
 	const inputRef = useRef<HTMLInputElement>(null)
-	const assistantID = "asst_619dFmW3XVqF7ZGxZ7p4wE3m"
-	const threadID = "thread_htFn6hZERUUOEHYpNTKOYQc9"
+	// const assistantID = "asst_619dFmW3XVqF7ZGxZ7p4wE3m"
+	// const threadID = "thread_htFn6hZERUUOEHYpNTKOYQc9"
 
 	// const getFile = async () => {
 	// 	// Upload a file with an "assistants" purpose
@@ -56,33 +56,19 @@ export default function Assistant() {
 
 	/* -- Assistants API Functions -- */
 
-	// Create a message
-	const createMessage = async (input: string) => {
-		await openai.beta.threads.messages.create(threadID, {
-			role: "user",
-			content: input
+	const fetchReply = async () => {
+		const url =
+			"https://yourvanlife.netlify.app/.netlify/functions/fetchAssistant"
+
+		const response = await fetch(url, {
+			method: "POST",
+			headers: {
+				"content-type": "text/plain"
+			},
+			body: userInput
 		})
-	}
-
-	// Run the assistant's thread
-	const runThread = async () => {
-		const run = await openai.beta.threads.runs.create(threadID, {
-			assistant_id: assistantID,
-			model: "gpt-3.5-turbo-1106",
-			instructions: `Only reply about campervans in the provided file. If questions are not related to campervans or you really don't know the answer, say "I'm sorry, I don't know the answer to that." And direct the questioner to email help@vanlife.com. Don't try to make up an answer. Never include sources or annotations in your reply. Keep your answers short.`,
-			tools: [{ type: "retrieval" }]
-		})
-		return run
-	}
-
-	// List thread messages
-	const listMessages = async () => {
-		return await openai.beta.threads.messages.list(threadID)
-	}
-
-	// Get the current run
-	const retrieveRun = async (thread: string, run: string) => {
-		return await openai.beta.threads.runs.retrieve(thread, run)
+		const data = await response.json()
+		setAsstResponse((data[0].content[0] as MessageContentText).text.value)
 	}
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -91,26 +77,7 @@ export default function Assistant() {
 		try {
 			setLoading(true)
 			setError(null)
-			// Create a message
-			await createMessage(userInput)
-
-			// Create a run
-			const run = await runThread()
-
-			// Retrieve the current run
-			let currentRun = await retrieveRun(threadID, run.id)
-
-			// Keep Run status up to date
-			// Poll for updates and check if run status is completed
-			while (currentRun.status !== "completed") {
-				await new Promise((resolve) => setTimeout(resolve, 1500))
-				console.log(currentRun.status)
-				currentRun = await retrieveRun(threadID, run.id)
-			}
-
-			// Get messages from the thread
-			const { data } = await listMessages()
-			setResponse((data[0].content[0] as MessageContentText).text.value)
+			await fetchReply()
 		} catch (error) {
 			console.error(error)
 			setError("Sorry, something went wrong. Please try again.")
@@ -140,7 +107,9 @@ export default function Assistant() {
 					type of adventure.
 				</p>
 				{error && <p className="text-red-500">{error}</p>}
-				{response && <p className="bg-gray-200 p-3 rounded-lg">{response}</p>}
+				{asstResponse && (
+					<p className="bg-gray-200 p-3 rounded-lg">{asstResponse}</p>
+				)}
 				{loading && (
 					<Lottie
 						className="w-16"
