@@ -1,0 +1,72 @@
+Name: Modest Explorer 
+Type: Simple
+Price: £60 per night  
+Seats: 4
+Sleeps: 2
+Transmission: Automatic
+Pet friendly: Yes
+Festival friendly: No
+Rating: 5.0
+Features: Cooler, Collapsible ladder, Radio with AUX and USB, Car jack, triangle & vests, Kitchen kit, Portable gas cooker, Automatic, Rooftop tent, Exterior shower, Rear-view camera
+Description: The Modest Explorer campervan, your passport to leaving the city behind and immersing yourself in the beauty of nature. This van is designed to be your gateway to the great outdoors, featuring an array of amenities that enable you to pack up your home and escape for a weekend or even an extended adventure.
+
+Name: Beach Bum
+Type: Rugged
+Price: £80 per night 
+Seats: 5
+Sleeps: 4
+Transmission: Manual
+Pet friendly: Yes
+Festival friendly: Yes
+Rating: 5.0
+Features: Cooler, Collapsible ladder, Radio with AUX and USB, Car jack, triangle & vests, Kitchen kit, Portable gas cooker, Automatic, Rooftop tent, Exterior shower, Rear-view camera
+Description: The Beach Bum campervan, where the spirit of the surfers meets the thrill of travel. This campervan is not your typical ride; it's your mobile home-away-from-home with a touch of coastal cool, and it's packed with some exceptional features you won't find in an ordinary camper.
+The Beach Bum campervan is your invitation to the ultimate seaside adventure, allowing you to chase waves, explore sandy shores, and immerse yourself in the beach lifestyle while still enjoying the comforts of home.
+
+Name: Reliable Red
+Type: Luxury
+Price: £100 per night 
+Seats: 5
+Sleeps: 2
+Transmission: Automatic
+Pet friendly: No
+Festival friendly: Yes
+Rating: 5.0
+Features: Fridge (84L), Gas stove, Water tank, 24/7 assistance, Rooftop tent, Exterior wash station, Car jack, triangle & vests, Kitchen kit,Portable gas cooker, Automatic, Rear-view camera, Mosquito net, Radio with AUX and USB, Interior dining table, LP, smoke and carbon monoxide detectors, Cleaning kit, Floor storage, Heater
+Description: Reliable Red, a trusty companion made for those who have a passion for travel. This van is designed to offer a comfortable and cosy interior, providing ample space for relaxation. Equipped with a small kitchen, you can prepare your meals, making you feel right at home as soon as you step out of it. This campervan is the perfect partner for your travels, offering a comfortable and cosy interior that invites you to unwind and stretch out during your journeys.
+
+Name: Dreamfinder
+Type: Simple
+Price: £65 per night  
+Seats: 4
+Sleeps: 2
+Transmission: Automatic
+Pet friendly: Yes
+Festival friendly: Yes
+Rating: 5.0
+Features: Cooler, Collapsible ladder, Radio with AUX and USB, Car jack, triangle & vests, Kitchen kit, Portable gas cooker, Automatic, Rooftop tent, Exterior shower, Rear-view camera
+Description: The Dreamfinder campervan is your ultimate travel companion for unforgettable journeys. This van is designed for you to explore, experience, and enjoy, offering a spacious interior with a comfortable ceiling height of 2.1 meters, allowing you to stand and move around with ease.
+
+Name: The Cruiser
+Type: Luxury
+Price: £120 per night 
+Seats: 5
+Sleeps: 4
+Transmission: Automatic
+Pet friendly: Yes
+Festival friendly: No
+Rating: 5.0
+Features: Fridge (84L), Gas stove, Water tank, 24/7 assistance, Rooftop tent, Exterior wash station, Car jack, triangle & vests, Kitchen kit,Portable gas cooker, Automatic, Rear-view camera, Mosquito net, Radio with AUX and USB, Interior dining table, LP, smoke and carbon monoxide detectors, Cleaning kit, Floor storage, Heater
+Description: Introducing The Cruiser campervan, the epitome of comfort and luxury for travelers who appreciate the finer things in life. This van is designed to provide a premium travel experience with its abundance of windows, spacious interior, and ample storage space, ensuring you enjoy breathtaking views wherever your journey takes you.The Cruiser: This campervan is a testament to luxury on the road, offering a level of comfort that turns every trip into an opulent experience.
+
+Name: Green Wonder
+Type: Rugged
+Price: £70 per night 
+Seats: 4
+Sleeps: 2
+Transmission: Automatic
+Pet friendly: Yes
+Festival friendly: Yes
+Rating: 5.0
+Features: Cooler, Collapsible ladder, Radio with AUX and USB, Car jack, triangle & vests, Kitchen kit, Portable gas cooker, Automatic, Rooftop tent, Exterior shower, Rear-view camera
+Description: The Green Wonder campervan, a sustainable marvel that takes your travel adventures to the next level. This eco-friendly vehicle is not just a mode of transport; it's a stylish and environmentally conscious way to journey to any destination. With this van, you can elevate your travel experience while treading lightly on the planet. The Green Wonder is a sustainable vehicle designed for those who appreciate style and eco-friendliness.

@@ -5,6 +5,7 @@ import VanCard from "@/components/vans/VanCard"
 import Filters from "@/components/vanFilters/Filters"
 import { VanType } from "@/types/vanType"
 import Loading from "@/components/Loading"
+import Assistant from "@/components/ai/Assistant"
 
 export default function Vans() {
 	const { vans, setVans } = useContext(VansDataContext)
@@ -75,6 +76,7 @@ export default function Vans() {
 			<h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-primaryText text-center md:text-left pt-8">
 				Explore our van options
 			</h1>
+			<Assistant />
 			<Filters
 				setNoVans={setNoVans}
 				vanTypeColour={vanTypeColour}
