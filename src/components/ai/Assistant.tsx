@@ -74,6 +74,7 @@ export default function Assistant() {
 			setLoading(true)
 			setError(null)
 			const data = await fetchReply()
+			//TODO: check for name property on data obj
 			setAsstResponse(
 				(data.reply[0].content[0] as MessageContentText).text.value
 			)

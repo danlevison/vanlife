@@ -22,7 +22,7 @@ export default function About() {
 
 			<div className="pt-14 md:pt-0">
 				<div className="max-w-[1240px] px-8">
-					<div className="w-full max-w-[780px] mx-auto mb-16">
+					<div className="w-full max-w-[780px] mx-auto mb-12">
 						<h2 className="text-3xl sm:text-4xl md:text-4xl font-bold pt-10 pb-6">
 							Don’t squeeze in a sedan when you could relax in a van.
 						</h2>
