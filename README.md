@@ -34,6 +34,6 @@ MIT License
 
 ## Contact
 
-Author: Daniel Levison
-Email: dan.ejlevison@gmail.com
-GitHub: https://github.com/danlevison
+- Author: Daniel Levison
+- Email: dan.ejlevison@gmail.com
+- GitHub: https://github.com/danlevison
