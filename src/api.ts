@@ -32,7 +32,8 @@ export async function signUpNewUser(
 				name: name,
 				country: "",
 				date_of_birth: "",
-				phone: ""
+				phone: "",
+				credit: 4
 			}
 		}
 	})
