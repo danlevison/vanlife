@@ -24,6 +24,8 @@ export default function Assistant() {
 	const navigate = useNavigate()
 	const location = useLocation()
 
+	console.log(user?.user_metadata.credit)
+
 	// const getFile = async () => {
 	// 	// Upload a file with an "assistants" purpose
 	// 	const file = await openai.files.create({
@@ -66,6 +68,12 @@ export default function Assistant() {
 		}
 	}
 
+	const claimCredit = async () => {
+		await supabase.auth.updateUser({
+			data: { credit: 4 }
+		})
+	}
+
 	const fetchReply = async () => {
 		const url =
 			"https://yourvanlife.netlify.app/.netlify/functions/fetchAssistant"
@@ -84,7 +92,7 @@ export default function Assistant() {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
-		if (user?.user_metadata.credit === 0) {
+		if (user?.user_metadata.credit === 0 || !user?.user_metadata.credit) {
 			setError("You have used up all of your credit")
 			return
 		}
@@ -114,7 +122,17 @@ export default function Assistant() {
 			<div className="flex justify-between items-center bg-accent h-16 rounded-t-lg p-3">
 				<div>
 					<h2 className="text-xl text-white">#VANLIFE</h2>
-					<p className="text-white">Credit: {user.user_metadata.credit}</p>
+					<div className="flex items-center gap-2">
+						<p className="text-white">Credit: {user.user_metadata.credit}</p>
+						{user.user_metadata.credit === undefined && (
+							<button
+								onClick={claimCredit}
+								className="text-white underline"
+							>
+								Claim credit
+							</button>
+						)}
+					</div>
 				</div>
 				<Button
 					onClick={() => setShowChat(false)}
