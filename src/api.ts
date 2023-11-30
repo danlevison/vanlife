@@ -52,7 +52,9 @@ export async function signInWithGoogle() {
 	const { data } = await supabase.auth.signInWithOAuth({
 		provider: "google"
 	})
-
+	await supabase.auth.updateUser({
+		data: { credit: 4 }
+	})
 	return data
 }
 
