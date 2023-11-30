@@ -112,7 +112,10 @@ export default function Assistant() {
 	return showChat && user ? (
 		<div className="flex flex-col fixed bottom-2 right-2 w-full h-full max-w-[400px] max-h-[500px] bg-white rounded-lg z-50">
 			<div className="flex justify-between items-center bg-accent h-16 rounded-t-lg p-3">
-				<h2 className="text-xl text-white">#VANLIFE</h2>
+				<div>
+					<h2 className="text-xl text-white">#VANLIFE</h2>
+					<p className="text-white">Credit: {user.user_metadata.credit}</p>
+				</div>
 				<Button
 					onClick={() => setShowChat(false)}
 					variant={"link"}
