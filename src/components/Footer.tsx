@@ -189,19 +189,13 @@ export default function Footer() {
 					</div>
 					<ul className="flex items-center gap-2">
 						<li>
-							<a className="cursor-pointer">
-								<AiOutlineFacebook size={25} />
-							</a>
+							<AiOutlineFacebook size={25} />
 						</li>
 						<li>
-							<a className="cursor-pointer">
-								<AiOutlineInstagram size={25} />
-							</a>
+							<AiOutlineInstagram size={25} />
 						</li>
 						<li>
-							<a className="cursor-pointer">
-								<RiTwitterXLine size={25} />
-							</a>
+							<RiTwitterXLine size={25} />
 						</li>
 					</ul>
 				</div>
