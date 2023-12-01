@@ -2,7 +2,7 @@ import { useState, useRef } from "react"
 import useAuth from "@/hooks/useAuth"
 import supabase from "@/config/supabaseClient"
 import { useLocation, useNavigate } from "react-router-dom"
-// import { openai } from "@/config/openAiConfig"
+import { openai } from "@/config/openAiConfig"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { FaAngleDown } from "react-icons/fa"
@@ -24,8 +24,6 @@ export default function Assistant() {
 	const navigate = useNavigate()
 	const location = useLocation()
 
-	console.log(user?.user_metadata.credit)
-
 	// const getFile = async () => {
 	// 	// Upload a file with an "assistants" purpose
 	// 	const file = await openai.files.create({
@@ -38,33 +36,46 @@ export default function Assistant() {
 
 	// getFile()
 
-	// Create #VANLIFE Assistant
-	// const createAssistant = async () => {
-	// 	const myAssistant = await openai.beta.assistants.create({
-	// 		instructions: `You are great at recommending campervans. When asked a question, use the information in the provided file to form a friendly response. If you cannot find the answer in the file, do not make up an answer. Just reply with "Sorry, I do not know.". Never provide annotations like these (【14†source】) in your reply.`,
-	// 		name: "#VANLIFE assistant",
-	// 		tools: [{ type: "retrieval" }],
-	// 		model: "gpt-4-1106-preview",
-	// 		file_ids: ["file-Bsm95hQxzHhLX5zvA5NV8wZj"]
-	// 	})
+	// Create #VANLIFE Assistant for each user
+	const createAssistant = async () => {
+		const myAssistant = await openai.beta.assistants.create({
+			instructions: `You are great at recommending campervans. When asked a question or for a recommendation, use the information in the provided file to form a friendly response. If you cannot find the answer in the file, do not make up an answer. Just reply with "Sorry, I do not know." and direct the questioner to email help@vanlife.com. Never provide annotations like these (【14†source】) in your reply. Keep your answers very short`,
+			name: "#VANLIFE assistant",
+			tools: [{ type: "retrieval" }],
+			model: "gpt-4-1106-preview",
+			file_ids: ["file-Bsm95hQxzHhLX5zvA5NV8wZj"]
+		})
 
-	// 	console.log(myAssistant)
-	// }
+		return myAssistant.id
+	}
 
-	// createAssistant()
+	// Generate threadId for each user
+	const threadFunc = async () => {
+		const thread = await openai.beta.threads.create()
+		return thread.id
+	}
 
-	// const threadFunc = async () => {
-	// 	const thread = await openai.beta.threads.create()
-	// 	console.log(thread)
-	// }
-
-	// threadFunc()
-
-	const handleOpenAssistant = () => {
+	const handleOpenAssistant = async () => {
 		if (!user) {
 			navigate("/sign-in", { state: { from: location } })
 		} else {
 			setShowChat(true)
+
+			if (
+				user.user_metadata.asstId === undefined &&
+				user.user_metadata.threadId === undefined
+			) {
+				try {
+					const asstId = await createAssistant()
+					const threadId = await threadFunc()
+
+					await supabase.auth.updateUser({
+						data: { asstId, threadId }
+					})
+				} catch (error) {
+					console.error("Error updating user metadata:", error)
+				}
+			}
 		}
 	}
 
@@ -83,7 +94,11 @@ export default function Assistant() {
 			headers: {
 				"content-type": "text/plain"
 			},
-			body: userInput
+			body: JSON.stringify({
+				userInput,
+				asstId: user?.user_metadata.asstId as string,
+				threadId: user?.user_metadata.threadId as string
+			})
 		})
 		const data = await response.json()
 		return data
