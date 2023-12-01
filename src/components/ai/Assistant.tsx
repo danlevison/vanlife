@@ -2,7 +2,7 @@ import { useState, useRef } from "react"
 import useAuth from "@/hooks/useAuth"
 import supabase from "@/config/supabaseClient"
 import { useLocation, useNavigate } from "react-router-dom"
-import { openai } from "@/config/openAiConfig"
+// import { openai } from "@/config/openAiConfig"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { FaAngleDown } from "react-icons/fa"
@@ -37,23 +37,23 @@ export default function Assistant() {
 	// getFile()
 
 	// Create #VANLIFE Assistant for each user
-	const createAssistant = async () => {
-		const myAssistant = await openai.beta.assistants.create({
-			instructions: `You are great at recommending campervans. When asked a question or for a recommendation, use the information in the provided file to form a friendly response. If you cannot find the answer in the file, do not make up an answer. Just reply with "Sorry, I do not know." and direct the questioner to email help@vanlife.com. Never provide annotations like these (【14†source】) in your reply. Keep your answers very short`,
-			name: "#VANLIFE assistant",
-			tools: [{ type: "retrieval" }],
-			model: "gpt-4-1106-preview",
-			file_ids: ["file-Bsm95hQxzHhLX5zvA5NV8wZj"]
-		})
+	// const createAssistant = async () => {
+	// 	const myAssistant = await openai.beta.assistants.create({
+	// 		instructions: `You are great at recommending campervans. When asked a question or for a recommendation, use the information in the provided file to form a friendly response. If you cannot find the answer in the file, do not make up an answer. Just reply with "Sorry, I do not know." and direct the questioner to email help@vanlife.com. Never provide annotations like these (【14†source】) in your reply. Keep your answers very short`,
+	// 		name: "#VANLIFE assistant",
+	// 		tools: [{ type: "retrieval" }],
+	// 		model: "gpt-4-1106-preview",
+	// 		file_ids: ["file-Bsm95hQxzHhLX5zvA5NV8wZj"]
+	// 	})
 
-		return myAssistant.id
-	}
+	// 	return myAssistant.id
+	// }
 
 	// Generate threadId for each user
-	const threadFunc = async () => {
-		const thread = await openai.beta.threads.create()
-		return thread.id
-	}
+	// const threadFunc = async () => {
+	// 	const thread = await openai.beta.threads.create()
+	// 	return thread.id
+	// }
 
 	const handleOpenAssistant = async () => {
 		if (!user) {
@@ -61,21 +61,21 @@ export default function Assistant() {
 		} else {
 			setShowChat(true)
 
-			if (
-				user.user_metadata.asstId === undefined &&
-				user.user_metadata.threadId === undefined
-			) {
-				try {
-					const asstId = await createAssistant()
-					const threadId = await threadFunc()
+			// if (
+			// 	user.user_metadata.asstId === undefined &&
+			// 	user.user_metadata.threadId === undefined
+			// ) {
+			// 	try {
+			// 		const asstId = await createAssistant()
+			// 		const threadId = await threadFunc()
 
-					await supabase.auth.updateUser({
-						data: { asstId, threadId }
-					})
-				} catch (error) {
-					console.error("Error updating user metadata:", error)
-				}
-			}
+			// 		await supabase.auth.updateUser({
+			// 			data: { asstId, threadId }
+			// 		})
+			// 	} catch (error) {
+			// 		console.error("Error updating user metadata:", error)
+			// 	}
+			// }
 		}
 	}
 
