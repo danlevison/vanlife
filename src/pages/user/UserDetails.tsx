@@ -8,8 +8,6 @@ export default function UserDetails() {
 	const { user } = useAuth()
 	const [showForm, setShowForm] = useState(false)
 
-	// console.log(user)
-
 	return (
 		<div className="flex flex-grow flex-col w-full">
 			<div className="flex justify-between items-center">

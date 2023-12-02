@@ -57,7 +57,6 @@ const handler: Handler = async (e) => {
 		// Poll for updates and check if run status is completed
 		while (currentRun.status !== "completed") {
 			await new Promise((resolve) => setTimeout(resolve, 1500))
-			console.log(currentRun.status)
 			currentRun = await retrieveRun(threadId, run.id)
 		}
 
@@ -74,4 +73,4 @@ const handler: Handler = async (e) => {
 	}
 }
 
-export { openai, handler }
+export { handler }

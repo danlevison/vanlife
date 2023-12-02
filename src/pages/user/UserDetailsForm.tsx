@@ -44,7 +44,7 @@ export default function UserDetailsForm({
 			)
 			setShowForm(false)
 		} catch (error) {
-			console.log(error)
+			console.error(error)
 			setError(
 				"An error occurred while updating account details. Please try again."
 			)
