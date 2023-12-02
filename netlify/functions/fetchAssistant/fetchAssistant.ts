@@ -8,10 +8,7 @@ type RequestBody = {
 }
 
 const handler: Handler = async (e) => {
-	const { userInput }: RequestBody = JSON.parse(e.body!)
-
-	const asstId = "asst_kY6Ru0JsnK0bLv3O9Cg4lGto"
-	const threadId = "thread_abSif0n52WbM6o67GEAU7TLm"
+	const { asstId, threadId, userInput }: RequestBody = JSON.parse(e.body!)
 
 	/* -- Assistants API Functions -- */
 	// Create a message
