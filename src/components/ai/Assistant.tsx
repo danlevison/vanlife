@@ -108,11 +108,22 @@ export default function Assistant() {
 				})
 			})
 
+			if (!response.ok) {
+				setMessages((prevMessages) => [
+					...prevMessages,
+					"Sorry, something went wrong. Please try again."
+				])
+				return
+			}
+
 			const data = await response.json()
 			return data
 		} catch (error) {
 			console.error("Fetch error:", error)
-			setError("Sorry, something went wrong. Please try again.")
+			setMessages((prevMessages) => [
+				...prevMessages,
+				"Sorry, something went wrong. Please try again."
+			])
 		}
 	}
 

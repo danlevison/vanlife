@@ -53,7 +53,7 @@ const handler: Handler = async (e) => {
 		// Keep Run status up to date
 		// Poll for updates and check if run status is completed
 		while (currentRun.status !== "completed") {
-			await new Promise((resolve) => setTimeout(resolve, 1500))
+			await new Promise((resolve) => setTimeout(resolve, 1000))
 			currentRun = await retrieveRun(threadId, run.id)
 		}
 
