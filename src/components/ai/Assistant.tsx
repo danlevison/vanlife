@@ -108,8 +108,6 @@ export default function Assistant() {
 				})
 			})
 
-			console.log("Response status:", response.status)
-
 			const data = await response.json()
 			return data
 		} catch (error) {
@@ -132,13 +130,16 @@ export default function Assistant() {
 			setLoading(true)
 			setError(null)
 			const data = await fetchReply()
-			setMessages((prevMessages) => [
-				...prevMessages,
-				(data.reply[0].content[0] as MessageContentText).text.value
-			])
-			await supabase.auth.updateUser({
-				data: { credit: user?.user_metadata.credit - 1 }
-			})
+			if (data.reply && data.reply.length > 0) {
+				setMessages((prevMessages) => [
+					...prevMessages,
+					(data.reply[0].content[0] as MessageContentText).text.value
+				])
+
+				await supabase.auth.updateUser({
+					data: { credit: user?.user_metadata.credit - 1 }
+				})
+			}
 		} catch (error) {
 			console.error(error)
 			setMessages((prevMessages) => [
