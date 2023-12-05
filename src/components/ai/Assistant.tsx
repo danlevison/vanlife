@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import useAuth from "@/hooks/useAuth"
 import supabase from "@/config/supabaseClient"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -25,14 +25,14 @@ export default function Assistant() {
 	const location = useLocation()
 	const autoScrollAnchorRef = useRef<HTMLDivElement>(null)
 
-	// useEffect(() => {
-	// 	if (messages.length) {
-	// 		autoScrollAnchorRef.current?.scrollIntoView({
-	// 			behavior: "smooth",
-	// 			block: "end"
-	// 		})
-	// 	}
-	// }, [messages.length])
+	useEffect(() => {
+		if (messages.length) {
+			autoScrollAnchorRef.current?.scrollIntoView({
+				behavior: "smooth",
+				block: "end"
+			})
+		}
+	}, [messages.length])
 
 	// const getFile = async () => {
 	// 	// Upload a file with an "assistants" purpose
@@ -95,19 +95,27 @@ export default function Assistant() {
 		const url =
 			"https://yourvanlife.netlify.app/.netlify/functions/fetchAssistant"
 
-		const response = await fetch(url, {
-			method: "POST",
-			headers: {
-				"content-type": "text/plain"
-			},
-			body: JSON.stringify({
-				userInput,
-				asstId: user?.user_metadata.asstId as string,
-				threadId: user?.user_metadata.threadId as string
+		try {
+			const response = await fetch(url, {
+				method: "POST",
+				headers: {
+					"content-type": "text/plain"
+				},
+				body: JSON.stringify({
+					userInput,
+					asstId: user?.user_metadata.asstId as string,
+					threadId: user?.user_metadata.threadId as string
+				})
 			})
-		})
-		const data = await response.json()
-		return data
+
+			console.log("Response status:", response.status)
+
+			const data = await response.json()
+			return data
+		} catch (error) {
+			console.error("Fetch error:", error)
+			setError("Sorry, something went wrong. Please try again.")
+		}
 	}
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
