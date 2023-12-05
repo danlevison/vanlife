@@ -120,10 +120,6 @@ export default function Assistant() {
 			return data
 		} catch (error) {
 			console.error("Fetch error:", error)
-			setMessages((prevMessages) => [
-				...prevMessages,
-				"Sorry, something went wrong. Please try again."
-			])
 		}
 	}
 
@@ -141,7 +137,7 @@ export default function Assistant() {
 			setLoading(true)
 			setError(null)
 			const data = await fetchReply()
-			if (data.reply && data.reply.length > 0) {
+			if (data) {
 				setMessages((prevMessages) => [
 					...prevMessages,
 					(data.reply[0].content[0] as MessageContentText).text.value
