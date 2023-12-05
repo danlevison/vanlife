@@ -25,14 +25,14 @@ export default function Assistant() {
 	const location = useLocation()
 	const autoScrollAnchorRef = useRef<HTMLDivElement>(null)
 
-	useEffect(() => {
-		if (messages.length) {
-			autoScrollAnchorRef.current?.scrollIntoView({
-				behavior: "smooth",
-				block: "end"
-			})
-		}
-	}, [messages.length])
+	// useEffect(() => {
+	// 	if (messages.length) {
+	// 		autoScrollAnchorRef.current?.scrollIntoView({
+	// 			behavior: "smooth",
+	// 			block: "end"
+	// 		})
+	// 	}
+	// }, [messages.length])
 
 	// const getFile = async () => {
 	// 	// Upload a file with an "assistants" purpose
