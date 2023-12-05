@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import useAuth from "@/hooks/useAuth"
 import supabase from "@/config/supabaseClient"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -17,12 +17,22 @@ export default function Assistant() {
 	const { user } = useAuth()
 	const [showChat, setShowChat] = useState(false)
 	const [userInput, setUserInput] = useState("")
-	const [asstResponse, setAsstResponse] = useState<string | null>(null)
+	const [messages, setMessages] = useState<string[]>([])
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
 	const inputRef = useRef<HTMLInputElement>(null)
 	const navigate = useNavigate()
 	const location = useLocation()
+	const autoScrollAnchorRef = useRef<HTMLDivElement>(null)
+
+	useEffect(() => {
+		if (messages.length) {
+			autoScrollAnchorRef.current?.scrollIntoView({
+				behavior: "smooth",
+				block: "end"
+			})
+		}
+	}, [messages.length])
 
 	// const getFile = async () => {
 	// 	// Upload a file with an "assistants" purpose
@@ -108,19 +118,25 @@ export default function Assistant() {
 			return
 		}
 
+		setMessages((prevMessages) => [...prevMessages, userInput])
+
 		try {
 			setLoading(true)
 			setError(null)
 			const data = await fetchReply()
-			setAsstResponse(
+			setMessages((prevMessages) => [
+				...prevMessages,
 				(data.reply[0].content[0] as MessageContentText).text.value
-			)
+			])
 			await supabase.auth.updateUser({
 				data: { credit: user?.user_metadata.credit - 1 }
 			})
 		} catch (error) {
 			console.error(error)
-			setError("Sorry, something went wrong. Please try again.")
+			setMessages((prevMessages) => [
+				...prevMessages,
+				"Sorry, something went wrong. Please try again."
+			])
 		} finally {
 			setLoading(false)
 			setUserInput("")
@@ -153,7 +169,7 @@ export default function Assistant() {
 					<FaAngleDown size={25} />
 				</Button>
 			</div>
-			<div className="flex flex-col gap-5 m-3 max-h-[350px] overflow-y-auto">
+			<div className="flex flex-col gap-5 m-3 max-h-[350px] overflow-auto">
 				<div>
 					<span className="font-bold">#VANLIFE Assistant</span>
 					<p className="bg-gray-200 p-3 rounded-lg">
@@ -163,12 +179,32 @@ export default function Assistant() {
 					</p>
 				</div>
 
-				{asstResponse && (
-					<div>
-						<span className="font-bold">#VANLIFE Assistant</span>
-						<p className="bg-gray-200 p-3 rounded-lg">{asstResponse}</p>
-					</div>
-				)}
+				{messages.map((message, i) => {
+					if (i % 2 === 0) {
+						return (
+							<div key={i}>
+								<span className="font-bold">You</span>
+								<p className="bg-blue-200 p-3 rounded-lg">{message}</p>
+							</div>
+						)
+					} else {
+						return (
+							<div key={i}>
+								<span className="font-bold">#VANLIFE Assistant</span>
+								<p
+									className={`bg-gray-200 p-3 rounded-lg ${
+										message === "Sorry, something went wrong. Please try again."
+											? "text-red-500"
+											: ""
+									}`}
+								>
+									{message}
+								</p>
+							</div>
+						)
+					}
+				})}
+
 				{error && <p className="text-red-500">{error}</p>}
 				{loading && (
 					<Lottie
@@ -176,6 +212,7 @@ export default function Assistant() {
 						animationData={typingAnimation}
 					/>
 				)}
+				<div ref={autoScrollAnchorRef} />
 			</div>
 			<form
 				onSubmit={handleSubmit}
