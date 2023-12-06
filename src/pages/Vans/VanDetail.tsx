@@ -9,7 +9,7 @@ import Description from "../../components/vanDetail/Description"
 import Features from "../../components/vanDetail/Features"
 import Details from "../../components/vanDetail/Details"
 import Rules from "../../components/vanDetail/Rules"
-import CheckAvailability from "../../components/vanDetail/CheckAvailability"
+import CheckAvailability from "../../components/vanDetail/vanAvailability/CheckAvailability"
 import Cancellation from "../../components/vanDetail/Cancellation"
 //types
 import { VanType } from "../../types/vanType"
