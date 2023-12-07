@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { LiaBoltSolid } from "react-icons/lia"
 import DateRangePicker from "./DateRangePicker"
 import { Button } from "@/components/ui/button"
@@ -21,6 +21,16 @@ export default function CheckAvailability({ van }: CheckAvailabilityProps) {
 	})
 	const [showTripCosts, setShowTripCosts] = useState(false)
 	const [tripNights, setTripNights] = useState(0)
+	const [searchParams, setSearchParams] = useSearchParams()
+	const fromParam = searchParams.get("from")
+	const toParam = searchParams.get("to")
+
+	useEffect(() => {
+		if (fromParam && toParam) {
+			setDate({ from: new Date(fromParam), to: new Date(toParam) })
+			setShowTripCosts(true)
+		}
+	}, [fromParam, toParam])
 
 	useEffect(() => {
 		const day = 1000 * 60 * 60 * 24 // milliseconds in a day
@@ -28,8 +38,12 @@ export default function CheckAvailability({ van }: CheckAvailabilityProps) {
 		if (date?.from && date?.to) {
 			const tripLength = date.to.getTime() - date.from.getTime()
 			setTripNights(Math.floor(tripLength / day))
+			setSearchParams({
+				"from": date.from.toDateString(),
+				"to": date.to.toDateString()
+			})
 		}
-	}, [date?.from, date?.to])
+	}, [date?.from, date?.to, setSearchParams])
 
 	return (
 		<div className="border border-gray-300 rounded-md w-full max-w-[330px]">
