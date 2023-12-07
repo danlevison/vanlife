@@ -51,7 +51,7 @@ export default function Features({ van }: FeaturesProps) {
 	const displayedFeatures = van.features.slice(0, 6)
 
 	return (
-		<div className="py-5 border-b border-gray-300">
+		<div className="py-5 border-b border-gray-300 w-full">
 			<h4 className="font-bold text-xl">Included features</h4>
 			<ul className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-4 pt-5">
 				{displayedFeatures.map((feature) => (

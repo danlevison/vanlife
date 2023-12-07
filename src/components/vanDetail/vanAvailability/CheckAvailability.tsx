@@ -8,6 +8,7 @@ import { DateRange } from "react-day-picker"
 import TripCosts from "./TripCosts"
 //types
 import { VanType } from "@/types/vanType"
+import MobileDateRangePicker from "./MobileDateRangePicker"
 
 type CheckAvailabilityProps = {
 	van: VanType
@@ -47,6 +48,10 @@ export default function CheckAvailability({ van }: CheckAvailabilityProps) {
 					date={date}
 					setDate={setDate}
 				/>
+				<MobileDateRangePicker
+					date={date}
+					setDate={setDate}
+				/>
 
 				{showTripCosts ? (
 					<>
@@ -75,6 +80,7 @@ export default function CheckAvailability({ van }: CheckAvailabilityProps) {
 				) : (
 					<Button
 						onClick={() => setShowTripCosts(true)}
+						disabled={!date?.from || !date.to}
 						className="mt-10 sm:text-lg font-bold w-full"
 					>
 						Check Availability

@@ -14,7 +14,7 @@ export default function Description({ van }: DescriptionProps) {
 		: van.vehicle_description
 
 	return (
-		<div className="py-5 border-y border-gray-300">
+		<div className="py-5 border-b border-gray-300 w-full">
 			<h4 className="font-bold text-xl">Vehicle description</h4>
 			<div className="pt-5 md:max-w-[600px] leading-relaxed">
 				{displayedDescription.map((item) => (

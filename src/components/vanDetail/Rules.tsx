@@ -20,7 +20,7 @@ export default function Rules({ van }: RulesProps) {
 	}
 
 	return (
-		<div className="py-5 border-b border-gray-300">
+		<div className="py-5 border-b border-gray-300 w-full">
 			<h4 className="font-bold text-xl">Vehicle rules</h4>
 			<ul className="flex flex-wrap gap-10 py-5">
 				{van.vehicle_rules.map((rule) => (

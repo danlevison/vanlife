@@ -19,7 +19,7 @@ export default function Details({ van }: DetailsProps) {
 	} = van?.vehicle_details as VehicleDetails
 
 	return (
-		<div className="py-5 border-b border-gray-300">
+		<div className="py-5 border-b border-gray-300 w-full">
 			<h4 className="font-bold text-xl">Vehicle details</h4>
 			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 py-5">
 				<li>

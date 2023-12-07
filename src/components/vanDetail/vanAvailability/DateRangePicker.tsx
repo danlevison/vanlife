@@ -25,7 +25,7 @@ export default function DateRangePicker({
 	secondaryButton
 }: DateRangePickerType) {
 	return (
-		<div className={cn("grid gap-2", className)}>
+		<div className={cn("hidden md:grid gap-2", className)}>
 			<Popover>
 				<PopoverTrigger asChild>
 					{secondaryButton ? (
@@ -70,7 +70,7 @@ export default function DateRangePicker({
 				</PopoverTrigger>
 				<PopoverContent
 					className="w-auto p-0"
-					align="start"
+					align="center"
 				>
 					<Calendar
 						initialFocus
