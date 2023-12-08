@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Link, useSearchParams } from "react-router-dom"
 import { LiaBoltSolid } from "react-icons/lia"
 import DateRangePicker from "./DateRangePicker"
 import { Button } from "@/components/ui/button"
 import { addDays } from "date-fns"
-import { DateRange } from "react-day-picker"
 import TripCosts from "./TripCosts"
-//types
-import { VanType } from "@/types/vanType"
 import MobileDateRangePicker from "./MobileDateRangePicker"
+//types
+import { DateRange } from "react-day-picker"
+import { VanType } from "@/types/vanType"
 
 type CheckAvailabilityProps = {
 	van: VanType
@@ -24,6 +24,7 @@ export default function CheckAvailability({ van }: CheckAvailabilityProps) {
 	const [searchParams, setSearchParams] = useSearchParams()
 	const fromParam = searchParams.get("from")
 	const toParam = searchParams.get("to")
+	const scrollToCostsRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
 		if (fromParam && toParam) {
@@ -55,7 +56,10 @@ export default function CheckAvailability({ van }: CheckAvailabilityProps) {
 					<p>Fast booking</p>
 				</div>
 			</div>
-			<div className="p-4">
+			<div
+				ref={scrollToCostsRef}
+				className="p-4"
+			>
 				<p className="text-sm font-bold mb-1">Dates</p>
 				<DateRangePicker
 					date={date}
@@ -64,6 +68,8 @@ export default function CheckAvailability({ van }: CheckAvailabilityProps) {
 				<MobileDateRangePicker
 					date={date}
 					setDate={setDate}
+					van={van}
+					scrollToCostsRef={scrollToCostsRef}
 				/>
 
 				{showTripCosts ? (

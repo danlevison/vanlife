@@ -15,58 +15,52 @@ type DateRangePickerType = {
 	date: DateRange | undefined
 	setDate: React.Dispatch<React.SetStateAction<DateRange | undefined>>
 	className?: React.HTMLAttributes<HTMLDivElement>
-	secondaryButton?: React.ReactNode
 }
 
 export default function DateRangePicker({
 	date,
 	setDate,
-	className,
-	secondaryButton
+	className
 }: DateRangePickerType) {
 	return (
 		<div className={cn("hidden md:grid gap-2", className)}>
 			<Popover>
 				<PopoverTrigger asChild>
-					{secondaryButton ? (
-						secondaryButton
-					) : (
-						<Button
-							id="date"
-							variant={"outline"}
-							className={cn(
-								"w-full max-w-[300px] justify-start text-left font-normal",
-								!date && "text-muted-foreground"
-							)}
-						>
-							<CalendarIcon className="mr-2 h-4 w-4" />
-							{date?.from ? (
-								date.to ? (
-									<>
-										{format(date.from, "LLL dd, y")}{" "}
-										<BsArrowRight
-											size={20}
-											className="mx-2"
-										/>{" "}
-										{format(date.to, "LLL dd, y")}
-									</>
-								) : (
-									format(date.from, "LLL dd, y")
-								)
+					<Button
+						id="date"
+						variant={"outline"}
+						className={cn(
+							"w-full max-w-[300px] justify-start text-left font-normal",
+							!date && "text-muted-foreground"
+						)}
+					>
+						<CalendarIcon className="mr-2 h-4 w-4" />
+						{date?.from ? (
+							date.to ? (
+								<>
+									{format(date.from, "LLL dd, y")}{" "}
+									<BsArrowRight
+										size={20}
+										className="mx-2"
+									/>{" "}
+									{format(date.to, "LLL dd, y")}
+								</>
 							) : (
-								<div className="flex items-center justify-between w-full">
-									<p>When To Go</p>
-									<span>
-										<BsArrowRight
-											size={20}
-											className="mx-2"
-										/>
-									</span>
-									<p>When To Finish</p>
-								</div>
-							)}
-						</Button>
-					)}
+								format(date.from, "LLL dd, y")
+							)
+						) : (
+							<div className="flex items-center justify-between w-full">
+								<p>When To Go</p>
+								<span>
+									<BsArrowRight
+										size={20}
+										className="mx-2"
+									/>
+								</span>
+								<p>When To Finish</p>
+							</div>
+						)}
+					</Button>
 				</PopoverTrigger>
 				<PopoverContent
 					className="w-auto p-0"
