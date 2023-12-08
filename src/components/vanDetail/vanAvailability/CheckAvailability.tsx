@@ -28,7 +28,6 @@ export default function CheckAvailability({ van }: CheckAvailabilityProps) {
 	useEffect(() => {
 		if (fromParam && toParam) {
 			setDate({ from: new Date(fromParam), to: new Date(toParam) })
-			setShowTripCosts(true)
 		}
 	}, [fromParam, toParam])
 
