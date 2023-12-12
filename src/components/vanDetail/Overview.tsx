@@ -5,7 +5,7 @@ import { PiShower, PiTentLight } from "react-icons/pi"
 import { GiGearStickPattern } from "react-icons/gi"
 import { Badge } from "@/components/ui/badge"
 // types
-import { VanType } from "../../types/vanType"
+import { VanType } from "@/types/vanType"
 
 type OverviewProps = {
 	van: VanType

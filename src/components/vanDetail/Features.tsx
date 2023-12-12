@@ -10,9 +10,9 @@ import {
 import { FaVest } from "react-icons/fa"
 import { TbToolsKitchen2, TbCooker } from "react-icons/tb"
 import { GiGearStickPattern, GiWaterTank } from "react-icons/gi"
-// types
-import { VanType } from "../../types/vanType"
 import FeaturesModal from "./FeaturesModal"
+// types
+import { VanType } from "@/types/vanType"
 
 type FeaturesProps = {
 	van: VanType

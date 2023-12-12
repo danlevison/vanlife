@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+//types
 import { VanType } from "@/types/vanType"
 
 type HostVansProps = {

@@ -1,18 +1,18 @@
 import { useContext, useEffect, useState } from "react"
-import VansDataContext from "../../context/VansDataContext"
+import VansDataContext from "@/context/VansDataContext"
 import { fetchVanData } from "@/api"
 import { useParams, Link, useLocation } from "react-router-dom"
 import { BsArrowLeft } from "react-icons/bs"
-import Overview from "../../components/vanDetail/Overview"
-import ImageHeader from "../../components/vanDetail/ImageHeader"
-import Description from "../../components/vanDetail/Description"
-import Features from "../../components/vanDetail/Features"
-import Details from "../../components/vanDetail/Details"
-import Rules from "../../components/vanDetail/Rules"
-import CheckAvailability from "../../components/vanDetail/vanAvailability/CheckAvailability"
-import Cancellation from "../../components/vanDetail/Cancellation"
+import Overview from "@/components/vanDetail/Overview"
+import ImageHeader from "@/components/vanDetail/ImageHeader"
+import Description from "@/components/vanDetail/Description"
+import Features from "@/components/vanDetail/Features"
+import Details from "@/components/vanDetail/Details"
+import Rules from "@/components/vanDetail/Rules"
+import CheckAvailability from "@/components/vanDetail/vanAvailability/CheckAvailability"
+import Cancellation from "@/components/vanDetail/Cancellation"
 //types
-import { VanType } from "../../types/vanType"
+import { VanType } from "@/types/vanType"
 
 export default function VanDetail() {
 	const { vans } = useContext(VansDataContext)

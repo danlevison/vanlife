@@ -1,5 +1,5 @@
 import { VehicleDetails } from "../../types/vanType"
-import { VanType } from "../../types/vanType"
+import { VanType } from "@/types/vanType"
 
 type DetailsProps = {
 	van: VanType

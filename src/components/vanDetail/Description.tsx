@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { PiCaretDownLight } from "react-icons/pi"
 //types
-import { VanType } from "../../types/vanType"
+import { VanType } from "@/types/vanType"
 
 type DescriptionProps = {
 	van: VanType

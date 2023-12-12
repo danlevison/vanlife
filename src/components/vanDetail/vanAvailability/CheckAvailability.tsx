@@ -85,7 +85,7 @@ export default function CheckAvailability({ van }: CheckAvailabilityProps) {
 									tripNights={tripNights}
 								/>
 								<Link
-									to={`/payment/${crypto.randomUUID()}`}
+									to="/host"
 									className="block mt-5 text-center py-2 bg-accent rounded-md text-white sm:text-lg font-bold hover:bg-accent/80 duration-300"
 								>
 									Continue

@@ -2,7 +2,7 @@ import { BsPersonVcard } from "react-icons/bs"
 import { PiPawPrint } from "react-icons/pi"
 import { GiMusicalNotes } from "react-icons/gi"
 // types
-import { VanType } from "../../types/vanType"
+import { VanType } from "@/types/vanType"
 
 type RulesProps = {
 	van: VanType

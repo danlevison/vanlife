@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import VansDataContext from "../../context/VansDataContext"
+import VansDataContext from "@/context/VansDataContext"
 import CheckboxFilters from "./CheckboxFilters"
 import SortBy from "./SortBy"
-
 //types
 import { VanType } from "@/types/vanType"
 
