@@ -17,7 +17,7 @@ export default function SignInPage() {
 		<>
 			<Link
 				to="/"
-				className="absolute top-6 left-10 text-2xl uppercase font-bold"
+				className="absolute top-4 left-8 text-2xl uppercase font-bold"
 			>
 				#Vanlife
 			</Link>

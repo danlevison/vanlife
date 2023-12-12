@@ -4,8 +4,8 @@ import { AuthProvider } from "./context/AuthContext"
 import Layout from "./components/layouts/Layout"
 import Home from "./pages/Home"
 import About from "./pages/About"
-import Vans from "./pages/Vans/Vans"
-import VanDetail from "./pages/Vans/VanDetail"
+import Vans from "./pages/vans/Vans"
+import VanDetail from "./pages/vans/VanDetail"
 import ScrollToTop from "./utils/ScrollToTop"
 import Contact from "./pages/Contact"
 import AuthRequired from "./components/layouts/AuthRequired"
@@ -22,10 +22,11 @@ import Income from "./pages/host/Income"
 import Reviews from "./pages/host/Reviews"
 import HostVans from "./pages/host/HostVans"
 import HostVanDetail from "./pages/host/HostVanDetail"
-import NotFound from "./pages/NotFound"
 import HostVanInfo from "./pages/host/HostVanInfo"
 import HostVanPricing from "./pages/host/HostVanPricing"
 import HostVanPhotos from "./pages/host/HostVanPhotos"
+import NotFound from "./pages/NotFound"
+import Checkout from "./pages/Checkout"
 function App() {
 	return (
 		<BrowserRouter>
@@ -131,6 +132,10 @@ function App() {
 									element={<UserSecurityLogin />}
 								/>
 							</Route>
+							<Route
+								path="payment/:id"
+								element={<Checkout />}
+							/>
 						</Route>
 					</Routes>
 				</VansDataProvider>
