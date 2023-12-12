@@ -3,9 +3,10 @@ import VansDataContext from "../../context/VansDataContext"
 import { fetchVansData } from "../../api"
 import VanCard from "@/components/vans/VanCard"
 import Filters from "@/components/vanFilters/Filters"
-import { VanType } from "@/types/vanType"
 import Loading from "@/components/Loading"
 import Assistant from "@/components/ai/Assistant"
+//types
+import { VanType } from "@/types/vanType"
 
 export default function Vans() {
 	const { vans, setVans } = useContext(VansDataContext)

@@ -27,6 +27,7 @@ import HostVanPricing from "./pages/host/HostVanPricing"
 import HostVanPhotos from "./pages/host/HostVanPhotos"
 import NotFound from "./pages/NotFound"
 import Checkout from "./pages/Checkout"
+
 function App() {
 	return (
 		<BrowserRouter>
